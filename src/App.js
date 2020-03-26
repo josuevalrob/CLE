@@ -27,11 +27,11 @@ validate.validators = {
 
 export default class App extends Component {
   render() {
-    console.log(process.env.REACT_APP_API_URL)
+    console.log(process.env)
     return (
       <ApolloProvider client={Client}>
         <ThemeProvider theme={theme}>
-          <Router history={browserHistory}>
+          <Router history={browserHistory} basename={process.env.PUBLIC_URL}>
             <Routes />
           </Router>
         </ThemeProvider>
