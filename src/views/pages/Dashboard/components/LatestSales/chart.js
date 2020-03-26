@@ -34,39 +34,48 @@ export const options = {
     footerFontColor: palette.text.secondary
   },
   layout: { padding: 0 },
-  scales: {
-    xAxes: [
-      {
-        barThickness: 12,
-        maxBarThickness: 10,
-        barPercentage: 0.5,
-        categoryPercentage: 0.5,
-        ticks: {
-          fontColor: palette.text.secondary
-        },
-        gridLines: {
-          display: false,
-          drawBorder: false
-        }
-      }
-    ],
-    yAxes: [
-      {
-        ticks: {
-          fontColor: palette.text.secondary,
-          beginAtZero: true,
-          min: 0
-        },
-        gridLines: {
-          borderDash: [2],
-          borderDashOffset: [2],
-          color: palette.divider,
-          drawBorder: false,
-          zeroLineBorderDash: [2],
-          zeroLineBorderDashOffset: [2],
-          zeroLineColor: palette.divider
-        }
-      }
-    ]
+  data: {
+      datasets: [{
+          barPercentage: 0.5,
+          barThickness: 6,
+          maxBarThickness: 8,
+          minBarLength: 2,
+          data: [10, 20, 30, 40, 50, 60, 70]
+      }]
   }
+  // scales: {
+  //   xAxes: [
+  //     {
+  //       barThickness: 12,
+  //       maxBarThickness: 10,
+  //       barPercentage: 0.5,
+  //       categoryPercentage: 0.5,
+  //       ticks: {
+  //         fontColor: palette.text.secondary
+  //       },
+  //       gridLines: {
+  //         display: false,
+  //         drawBorder: false
+  //       }
+  //     }
+  //   ],
+  //   yAxes: [
+  //     {
+  //       ticks: {
+  //         fontColor: palette.text.secondary,
+  //         beginAtZero: true,
+  //         min: 0
+  //       },
+  //       gridLines: {
+  //         borderDash: [2],
+  //         borderDashOffset: [2],
+  //         color: palette.divider,
+  //         drawBorder: false,
+  //         zeroLineBorderDash: [2],
+  //         zeroLineBorderDashOffset: [2],
+  //         zeroLineColor: palette.divider
+  //       }
+  //     }
+  //   ]
+  // }
 };

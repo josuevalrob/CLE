@@ -11,6 +11,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import './assets/scss/index.scss';
 import validators from './handlers/common/validators';
 import Routes from './handlers/Routes';
+import Client from './services/apolloClient'
+import { ApolloProvider } from 'react-apollo';
 
 const browserHistory = createBrowserHistory();
 
@@ -25,12 +27,15 @@ validate.validators = {
 
 export default class App extends Component {
   render() {
+    console.log(process.env.REACT_APP_API_URL)
     return (
-      <ThemeProvider theme={theme}>
-        <Router history={browserHistory}>
-          <Routes />
-        </Router>
-      </ThemeProvider>
+      <ApolloProvider client={Client}>
+        <ThemeProvider theme={theme}>
+          <Router history={browserHistory}>
+            <Routes />
+          </Router>
+        </ThemeProvider>
+      </ApolloProvider>
     );
   }
 }
