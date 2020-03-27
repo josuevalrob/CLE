@@ -15,6 +15,7 @@ import {
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
+  Invitation as InvitationView,
   NotFound as NotFoundView
 } from '../views/pages';
 
@@ -82,6 +83,9 @@ const Routes = () => {
         path="/sign-in"
       /> */}
       <PublicRoutes exact path="/sign-in" component={SignInView} />
+      
+      <PublicRoutes exact path="/inviteme" component={InvitationView} />
+      
       <RouteWithLayout
         component={NotFoundView}
         exact
