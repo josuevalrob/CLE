@@ -143,7 +143,7 @@ const SignIn = ({ history }) => {
                   No recuerdas tu contraseña?{' '}
                   <Link
                     component={RouterLink}
-                    to="/inviteme"
+                    to="/sign-up"
                     variant="h6"
                   >
                     Recuperar Contraseña
