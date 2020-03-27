@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from '../views/components';
+import {PublicRoutes} from '../handlers/guards'
 import { Main as MainLayout, Minimal as MinimalLayout } from '../views/layouts';
 
 import {
@@ -67,18 +68,20 @@ const Routes = () => {
         layout={MainLayout}
         path="/settings"
       />
-      <RouteWithLayout
+      {/* <RouteWithLayout
         component={SignUpView}
         exact
         layout={MinimalLayout}
         path="/sign-up"
-      />
-      <RouteWithLayout
+      /> */}
+      <PublicRoutes exact path="/sign-up" component={SignUpView} />
+      {/* <RouteWithLayout
         component={SignInView}
         exact
         layout={MinimalLayout}
         path="/sign-in"
-      />
+      /> */}
+      <PublicRoutes exact path="/sign-in" component={SignInView} />
       <RouteWithLayout
         component={NotFoundView}
         exact

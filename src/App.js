@@ -13,6 +13,7 @@ import validators from './handlers/common/validators';
 import Routes from './handlers/Routes';
 import Client from './services/apolloClient'
 import { ApolloProvider } from 'react-apollo';
+import { AuthStore } from './handlers/contexts/AuthStore';
 
 const browserHistory = createBrowserHistory();
 
@@ -27,12 +28,13 @@ validate.validators = {
 
 export default class App extends Component {
   render() {
-    console.log(process.env)
     return (
       <ApolloProvider client={Client}>
         <ThemeProvider theme={theme}>
           <BrowserRouter history={browserHistory} basename={process.env.PUBLIC_URL}>
-            <Routes />
+            <AuthStore>
+              <Routes />
+            </AuthStore>
           </BrowserRouter>
         </ThemeProvider>
       </ApolloProvider>

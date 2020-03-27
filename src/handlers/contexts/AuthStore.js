@@ -23,7 +23,8 @@ class AuthStore extends Component {
   render() {
     return (
       <AuthContext.Provider value={{ 
-        //* pasamos los valores al context. 
+        //* pasamos los valores al context.
+        test: this.state.test,
         user: this.state.user,
         onUserChange: this.handleUserChange,
         isAuthenticated: this.isAuthenticated,

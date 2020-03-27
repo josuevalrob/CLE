@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { AuthContext } from '../contexts/AuthStore'
-// !refactor!!
+
 const PublicRoute = ({ component: Component, ...rest }) => (
   <AuthContext.Consumer>
     {({ isAuthenticated }) => (

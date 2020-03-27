@@ -1,21 +1,19 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { AuthContext } from './../../../handlers/contexts/AuthStore'
 
-const RouteWithLayout = props => {
-  const { layout: Layout, component: Component, ...rest } = props;
-
-  return (
-    <Route
-      {...rest}
-      render={matchProps => (
-        <Layout>
-          <Component {...matchProps} />
-        </Layout>
-      )}
-    />
-  );
-};
+const RouteWithLayout = ({ layout: Layout, component: Component, ...rest }) => (
+  <AuthContext.Consumer>
+    {({ isAuthenticated}) => (
+      <Route render={
+        props => isAuthenticated()
+        ? <Layout><Component {...props}/></Layout>
+        : <Redirect to="/sign-in" />
+      } {...rest} />
+    )}
+  </AuthContext.Consumer>
+)
 
 RouteWithLayout.propTypes = {
   component: PropTypes.any.isRequired,
