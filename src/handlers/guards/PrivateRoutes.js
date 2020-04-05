@@ -4,7 +4,7 @@ import { AuthContext } from '../contexts/AuthStore'
 
 const PrivateRoute = ({ layout: Layout, component: Component, ...rest }) => (
   <AuthContext.Consumer>
-    {({ isAuthenticated}) => (
+    {({ isAuthenticated }) => (
       <Route render={
         props => isAuthenticated()
         ? <Component {...props}/>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import {
   Grid,
   Typography
@@ -70,4 +70,4 @@ const HalfPageImage = (props) => {
   )
 }
 
-export default HalfPageImage
+export default memo(HalfPageImage)

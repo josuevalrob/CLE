@@ -4,31 +4,13 @@ import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import useStyles from './style'
 import {HalfPageImage} from './../../components'
-import {
-  Grid,
-  Button,
-  TextField,
-  Link,
-  Typography
-} from '@material-ui/core';
+import {schema} from './signInValidationSchema'
+import {Grid, Button, TextField, Link, Typography } from '@material-ui/core';
+import {signInMutation} from '../../../services/mutations'
+import {Mutation} from 'react-apollo'
+import {withAuthConsumer} from './../../../handlers/contexts/AuthStore'
 
-const schema = {
-  email: {
-    presence: { allowEmpty: false, message: 'is required' },
-    email: true,
-    length: {
-      maximum: 64
-    }
-  },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 128
-    }
-  }
-};
-
-const SignIn = ({ history }) => {
+const SignIn = ({ onUserChange }) => {
   const classes = useStyles();
   // TODO create a custom hook 🎣
   const [formState, setFormState] = useState({
@@ -67,14 +49,20 @@ const SignIn = ({ history }) => {
     }));
   };
 
-  const handleSignIn = event => {
+  const handleSignIn = (event, graphQlCallback) => {
     event.preventDefault();
-    history.push('/');
+    graphQlCallback({
+      //* input is the variable required in Update and New Client
+      variables: formState.values
+    })
   };
 
-  const hasError = field =>
-    formState.touched[field] && formState.errors[field] ? true : false;
+  const hasError = field => !!(formState.touched[field] && formState.errors[field])
 
+  const handleComplete = ({login:{user}})=> {
+    // setLoader(false) //TODO
+    onUserChange(user); //* actualizamos el context, it will make the redirect!! 
+  }
   return (
     <div className={classes.root}>
       <Grid className={classes.grid} container>
@@ -90,7 +78,9 @@ const SignIn = ({ history }) => {
               </Typography>
             </div>
             <div className={classes.contentBody}>
-              <form className={classes.form} onSubmit={handleSignIn}>
+            <Mutation mutation={signInMutation} onCompleted={handleComplete} >
+            { graphQlCallback => (
+              <form className={classes.form} onSubmit={ e => handleSignIn(e, graphQlCallback)}>
                 <Typography className={classes.title} variant="h2">
                   <span role='img' aria-label='hello'>👋</span> Hey!, bienvenido de nuevo!
                 </Typography>
@@ -150,6 +140,8 @@ const SignIn = ({ history }) => {
                   </Link>
                 </Typography>
               </form>
+            )}
+            </Mutation>
             </div>
           </div>
         </Grid>
@@ -162,4 +154,4 @@ SignIn.propTypes = {
   history: PropTypes.object
 };
 
-export default withRouter(SignIn);
+export default withRouter(withAuthConsumer(SignIn));
