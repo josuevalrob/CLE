@@ -19,7 +19,7 @@ const SignIn = ({ onUserChange }) => {
     touched: {},
     errors: {}
   });
-
+  // const [isLoading, setLoader] = useState(false)
   useEffect(() => {
     const errors = validate(formState.values, schema);
 
@@ -51,16 +51,13 @@ const SignIn = ({ onUserChange }) => {
 
   const handleSignIn = (event, graphQlCallback) => {
     event.preventDefault();
-    graphQlCallback({
-      //* input is the variable required in Update and New Client
-      variables: formState.values
-    })
+    graphQlCallback({ variables: formState.values})
   };
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
 
   const handleComplete = ({login:{user}})=> {
-    // setLoader(false) //TODO
+    // setLoader(false) // TODO
     onUserChange(user); //* actualizamos el context, it will make the redirect!! 
   }
   return (

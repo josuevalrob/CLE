@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/styles';
 import { useMediaQuery } from '@material-ui/core';
+import { withAuthConsumer } from './../../../handlers/contexts/AuthStore'
 
 import { Sidebar, Topbar, Footer } from './components';
 
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Main = props => {
-  const { children } = props;
+  const { children, onUserChange } = props;
 
   const classes = useStyles();
   const theme = useTheme();
@@ -41,6 +42,8 @@ const Main = props => {
     setOpenSidebar(false);
   };
 
+  const onLogout = () => onUserChange();
+
   const shouldOpenSidebar = isDesktop ? true : openSidebar;
 
   return (
@@ -50,7 +53,7 @@ const Main = props => {
         [classes.shiftContent]: isDesktop
       })}
     >
-      <Topbar onSidebarOpen={handleSidebarOpen} />
+      <Topbar onSidebarOpen={handleSidebarOpen} logout={onLogout}/>
       <Sidebar
         onClose={handleSidebarClose}
         open={shouldOpenSidebar}
@@ -68,4 +71,4 @@ Main.propTypes = {
   children: PropTypes.node
 };
 
-export default Main;
+export default withAuthConsumer(Main);

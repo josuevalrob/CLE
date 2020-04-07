@@ -13,7 +13,9 @@ mutation login($email: String!, $password:String!) {
   }
 }
 `
+export const logoutMutation = gql `mutation logout { logout }`
 
+// ! when do we use this?
 export const signUpMutation = gql`
 mutation signup($input: UserInput){
   signup(input:$input){
