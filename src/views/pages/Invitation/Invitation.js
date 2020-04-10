@@ -4,7 +4,6 @@ import validate from 'validate.js';
 import {requestAccess} from '../../../services/mutations'
 import {schema} from './invitationValidationSchema'
 import {Mutation} from 'react-apollo'
-
 import {
   Grid,
   Button,
@@ -23,13 +22,15 @@ import {
   FormHelperText
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {useStyles, getModalStyle} from './styles'
+import {useStyles, getModalStyle} from './styles';
+
 const initialState = {
   values: {email:'', firstName:'', letter:''},
   isValid: false,
   touched: {},
   errors: {}
 }
+
 const Invitation = () => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);

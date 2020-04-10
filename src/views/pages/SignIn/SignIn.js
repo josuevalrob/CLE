@@ -5,20 +5,20 @@ import validate from 'validate.js';
 import useStyles from './style'
 import {HalfPageImage} from './../../components'
 import {schema} from './signInValidationSchema'
-import {Grid, Button, TextField, Link, Typography } from '@material-ui/core';
+import {Grid, Button, TextField, Link, Typography, CircularProgress, FormControl, FormHelperText } from '@material-ui/core';
 import {signInMutation} from '../../../services/mutations'
 import {Mutation} from 'react-apollo'
 import {withAuthConsumer} from './../../../handlers/contexts/AuthStore'
-
+const initialState = {
+  isValid: false,
+  values: {email:'',password:''},
+  touched: {},
+  errors: {}
+}
 const SignIn = ({ onUserChange }) => {
   const classes = useStyles();
   // TODO create a custom hook 🎣
-  const [formState, setFormState] = useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {}
-  });
+  const [formState, setFormState] = useState(initialState);
   // const [isLoading, setLoader] = useState(false)
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -49,17 +49,20 @@ const SignIn = ({ onUserChange }) => {
     }));
   };
 
-  const handleSignIn = (event, graphQlCallback) => {
+  const handleSignIn = async (event, graphQlCallback) => {
     event.preventDefault();
-    graphQlCallback({ variables: formState.values})
+    try {
+      await graphQlCallback({ variables: formState.values})
+    } catch (event) {
+      setFormState(initialState)
+    }
   };
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
 
-  const handleComplete = ({login:{user}})=> {
-    // setLoader(false) // TODO
-    onUserChange(user); //* actualizamos el context, it will make the redirect!! 
-  }
+  //* actualizamos el context, it will make the redirect!! 
+  const handleComplete = ({login:{user}})=> onUserChange(user);
+
   return (
     <div className={classes.root}>
       <Grid className={classes.grid} container>
@@ -76,8 +79,9 @@ const SignIn = ({ onUserChange }) => {
             </div>
             <div className={classes.contentBody}>
             <Mutation mutation={signInMutation} onCompleted={handleComplete} >
-            { graphQlCallback => (
+            { (graphQlCallback, { loading, error }) => (
               <form className={classes.form} onSubmit={ e => handleSignIn(e, graphQlCallback)}>
+                <FormControl error={!!error} fullWidth>
                 <Typography className={classes.title} variant="h2">
                   <span role='img' aria-label='hello'>👋</span> Hey!, bienvenido de nuevo!
                 </Typography>
@@ -88,30 +92,27 @@ const SignIn = ({ onUserChange }) => {
                   className={classes.textField}
                   error={hasError('email')}
                   fullWidth
-                  helperText={
-                    hasError('email') ? formState.errors.email[0] : null
-                  }
+                  helperText={hasError('email') ? formState.errors.email[0] : null}
                   label="Correo Electrónico"
                   name="email"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.email}
                   variant="outlined"
                 />
                 <TextField
                   className={classes.textField}
                   error={hasError('password')}
                   fullWidth
-                  helperText={
-                    hasError('password') ? formState.errors.password[0] : null
-                  }
+                  helperText={hasError('password') ? formState.errors.password[0] : null}
                   label="Contraseña"
                   name="password"
                   onChange={handleChange}
                   type="password"
-                  value={formState.values.password || ''}
+                  value={formState.values.password}
                   variant="outlined"
                 />
+                {!!error && <FormHelperText>El usuario o la contraseña son incorrectos</FormHelperText>}
                 <Button
                   className={classes.signInButton}
                   color="primary"
@@ -121,21 +122,19 @@ const SignIn = ({ onUserChange }) => {
                   type="submit"
                   variant="contained"
                 >
-                  Inicia Sesión
+                  {
+                    loading
+                    ? <CircularProgress />
+                    : 'Inicia Sesión'
+                  }
                 </Button>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
+                <Typography color="textSecondary" variant="body1" >
                   No recuerdas tu contraseña?{' '}
-                  <Link
-                    component={RouterLink}
-                    to="/sign-up"
-                    variant="h6"
-                  >
+                  <Link component={RouterLink} to="/sign-up" variant="h6">
                     Recuperar Contraseña
                   </Link>
                 </Typography>
+                </FormControl>
               </form>
             )}
             </Mutation>
@@ -145,10 +144,6 @@ const SignIn = ({ onUserChange }) => {
       </Grid>
     </div>
   );
-};
-
-SignIn.propTypes = {
-  history: PropTypes.object
 };
 
 export default withRouter(withAuthConsumer(SignIn));
