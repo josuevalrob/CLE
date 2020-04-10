@@ -1,66 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import {useForm} from '../../../handlers/customHook'
 import { Link as RouterLink, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import validate from 'validate.js';
 import useStyles from './style'
-import {HalfPageImage} from './../../components'
 import {schema} from './signInValidationSchema'
+import {HalfPageImage} from './../../components'
 import {Grid, Button, TextField, Link, Typography, CircularProgress, FormControl, FormHelperText } from '@material-ui/core';
 import {signInMutation} from '../../../services/mutations'
 import {Mutation} from 'react-apollo'
 import {withAuthConsumer} from './../../../handlers/contexts/AuthStore'
-const initialState = {
-  isValid: false,
-  values: {email:'',password:''},
-  touched: {},
-  errors: {}
-}
+
 const SignIn = ({ onUserChange }) => {
   const classes = useStyles();
   // TODO create a custom hook 🎣
-  const [formState, setFormState] = useState(initialState);
-  // const [isLoading, setLoader] = useState(false)
-  useEffect(() => {
-    const errors = validate(formState.values, schema);
-
-    setFormState(formState => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {}
-    }));
-  }, [formState.values]);
-
-  const handleChange = event => {
-    event.persist();
-
-    setFormState(formState => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]:
-          event.target.type === 'checkbox'
-            ? event.target.checked
-            : event.target.value
-      },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true
-      }
-    }));
-  };
+  const {formState, handleChange, reset} = useForm({email:'',password:''}, schema);
 
   const handleSignIn = async (event, graphQlCallback) => {
     event.preventDefault();
     try {
       await graphQlCallback({ variables: formState.values})
     } catch (event) {
-      setFormState(initialState)
+      reset()
     }
   };
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
 
-  //* actualizamos el context, it will make the redirect!! 
+  //* actualizamos el context, it will make the redirect!!
   const handleComplete = ({login:{user}})=> onUserChange(user);
 
   return (

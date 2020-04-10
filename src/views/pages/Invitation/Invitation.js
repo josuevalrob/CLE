@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
-import validate from 'validate.js';
+import {useForm} from '../../../handlers/customHook'
 import {requestAccess} from '../../../services/mutations'
 import {schema} from './invitationValidationSchema'
 import {Mutation} from 'react-apollo'
@@ -24,56 +24,25 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useStyles, getModalStyle} from './styles';
 
-const initialState = {
-  values: {email:'', firstName:'', letter:''},
-  isValid: false,
-  touched: {},
-  errors: {}
-}
-
 const Invitation = () => {
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
   // ! THIS MUST BE ACUSTOM HOOK!! 🎣
-  const [formState, setFormState] = useState(initialState);
-
-  const handleChange = event => {
-    event.persist();
-    setFormState(formState => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]: event.target.value
-      },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true
-      }
-    }));
-  };
-
-  useEffect(() => {
-    const errors = validate(formState.values, schema);
-    setFormState(formState => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {}
-    }));
-  }, [formState.values]);
+  const {formState, handleChange, reset} = useForm({email:'', firstName:'', letter:''}, schema);
 
   const handleInvitation = async (event, graphQlCallback) => {
     event.preventDefault();
     try {
       await graphQlCallback({ variables: { input: formState.values } });
     } catch (event) {
-      setFormState(initialState)
+      reset()
     }
   };
 
   const closeModal = () => {
     setOpen(false);
-    setFormState(initialState);
+    reset();
   }
 
   return (
