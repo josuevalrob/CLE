@@ -35,3 +35,14 @@ mutation signup($input: UserInput){
   }
 }
 `
+
+export const requestAccess = gql `
+mutation createGuest($input: GuestInput!) {
+  createGuest(input: $input) {
+    firstName
+    id
+    email
+    letter
+  }
+}
+`
