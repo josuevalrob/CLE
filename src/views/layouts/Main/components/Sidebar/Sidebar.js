@@ -3,16 +3,18 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import TextFieldsIcon from '@material-ui/icons/TextFields';
-import ImageIcon from '@material-ui/icons/Image';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import SettingsIcon from '@material-ui/icons/Settings';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
-
 import { Profile, SidebarNav } from './components';
+import {
+  Dashboard,
+  People,
+  ShoppingBasket,
+  TextFields,
+  Image,
+  AccountBox,
+  Settings,
+  LockOpen,
+  RecentActors,
+} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -46,42 +48,47 @@ const Sidebar = props => {
     {
       title: 'Dashboard',
       href: '/dashboard',
-      icon: <DashboardIcon />
+      icon: <Dashboard />
     },
     {
       title: 'Users',
       href: '/users',
-      icon: <PeopleIcon />
+      icon: <People />
+    },
+    {
+      title: 'Invitados',
+      href: '/guests',
+      icon: <RecentActors />
     },
     {
       title: 'Products',
       href: '/products',
-      icon: <ShoppingBasketIcon />
+      icon: <ShoppingBasket />
     },
     {
       title: 'Authentication',
       href: '/sign-in',
-      icon: <LockOpenIcon />
+      icon: <LockOpen />
     },
     {
       title: 'Typography',
       href: '/typography',
-      icon: <TextFieldsIcon />
+      icon: <TextFields />
     },
     {
       title: 'Icons',
       href: '/icons',
-      icon: <ImageIcon />
+      icon: <Image />
     },
     {
       title: 'Account',
       href: '/account',
-      icon: <AccountBoxIcon />
+      icon: <AccountBox />
     },
     {
       title: 'Settings',
       href: '/settings',
-      icon: <SettingsIcon />
+      icon: <Settings />
     }
   ];
 

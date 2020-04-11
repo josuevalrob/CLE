@@ -9,6 +9,7 @@ import {
   Dashboard as DashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
+  GuestList as GuestListView,
   Typography as TypographyView,
   Icons as IconsView,
   Account as AccountView,
@@ -69,23 +70,11 @@ const Routes = () => {
         layout={MainLayout}
         path="/settings"
       />
-      {/* <RouteWithLayout
-        component={SignUpView}
-        exact
-        layout={MinimalLayout}
-        path="/sign-up"
-      /> */}
+      <RouteWithLayout exact path="/guests" component={GuestListView} layout={MainLayout} />
       <PublicRoutes exact path="/sign-up" component={SignUpView} />
-      {/* <RouteWithLayout
-        component={SignInView}
-        exact
-        layout={MinimalLayout}
-        path="/sign-in"
-      /> */}
       <PublicRoutes exact path="/sign-in" component={SignInView} />
-      
       <PublicRoutes exact path="/inviteme" component={InvitationView} />
-      
+
       <RouteWithLayout
         component={NotFoundView}
         exact
