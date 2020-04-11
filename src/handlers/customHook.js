@@ -18,7 +18,7 @@ export const useForm = (values, schema) => {
       isValid: errors ? false : true,
       errors: errors || {}
     }));
-  }, [formState.values]);
+  }, [schema, formState.values]);
 
   const handleChange = event => {
     event.persist();
