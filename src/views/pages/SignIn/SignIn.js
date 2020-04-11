@@ -18,7 +18,7 @@ const SignIn = ({ onUserChange }) => {
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
 
-  //* actualizamos el context, it will make the redirect!!
+  //* actualizamos el context, it will force the redirect!!
   const handleComplete = ({login:{user}})=> onUserChange(user);
 
   return (
