@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import {useForm} from '../../../handlers/customHook'
+import {handleVariables} from '../../../handlers/curries';
 import {requestAccess} from '../../../services/mutations'
 import {schema} from './invitationValidationSchema'
 import {Mutation} from 'react-apollo'
@@ -28,17 +29,8 @@ const Invitation = () => {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  // ! THIS MUST BE ACUSTOM HOOK!! 🎣
   const {formState, handleChange, reset} = useForm({email:'', firstName:'', letter:''}, schema);
-
-  const handleInvitation = async (event, graphQlCallback) => {
-    event.preventDefault();
-    try {
-      await graphQlCallback({ variables: { input: formState.values } });
-    } catch (event) {
-      reset()
-    }
-  };
+  const handleInvitation = handleVariables(reset)( { input: formState.values } );
 
   const closeModal = () => {
     setOpen(false);

@@ -1,5 +1,6 @@
 import React from 'react';
-import {useForm} from '../../../handlers/customHook'
+import {useForm} from '../../../handlers/customHook';
+import {handleVariables} from '../../../handlers/curries';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import useStyles from './style'
 import {schema} from './signInValidationSchema'
@@ -13,15 +14,7 @@ const SignIn = ({ onUserChange }) => {
   const classes = useStyles();
   // TODO create a custom hook 🎣
   const {formState, handleChange, reset} = useForm({email:'',password:''}, schema);
-
-  const handleSignIn = async (event, graphQlCallback) => {
-    event.preventDefault();
-    try {
-      await graphQlCallback({ variables: formState.values})
-    } catch (event) {
-      reset()
-    }
-  };
+  const handleSignIn = handleVariables(reset)(formState.values);
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
 
