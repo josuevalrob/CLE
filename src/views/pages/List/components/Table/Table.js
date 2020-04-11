@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { makeStyles } from '@material-ui/styles';
+import { useTableStyles } from '../../style';
 import {
   Card,
   CardActions,
@@ -21,30 +21,10 @@ import {
 
 import { getInitials } from '../../../../helpers';
 
-const useStyles = makeStyles(theme => ({
-  root: {},
-  content: {
-    padding: 0
-  },
-  inner: {
-    minWidth: 1050
-  },
-  nameContainer: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  avatar: {
-    marginRight: theme.spacing(2)
-  },
-  actions: {
-    justifyContent: 'flex-end'
-  }
-}));
-
-const GuestsTable = props => {
+const TableList = props => {
   const { className, guests, ...rest } = props;
 
-  const classes = useStyles();
+  const classes = useTableStyles();
 
   const [selectedGuests, setSelectedGuests] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -179,9 +159,9 @@ const GuestsTable = props => {
   );
 };
 
-GuestsTable.propTypes = {
+TableList.propTypes = {
   className: PropTypes.string,
   guests: PropTypes.array.isRequired
 };
 
-export default GuestsTable;
+export default TableList;

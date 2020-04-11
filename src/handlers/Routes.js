@@ -9,7 +9,7 @@ import {
   Dashboard as DashboardView,
   ProductList as ProductListView,
   UserList as UserListView,
-  GuestList as GuestListView,
+  List as ListView,
   Typography as TypographyView,
   Icons as IconsView,
   Account as AccountView,
@@ -70,7 +70,7 @@ const Routes = () => {
         layout={MainLayout}
         path="/settings"
       />
-      <RouteWithLayout exact path="/guests" component={GuestListView} layout={MainLayout} />
+      <RouteWithLayout exact path="/guests" component={ListView} layout={MainLayout} />
       <PublicRoutes exact path="/sign-up" component={SignUpView} />
       <PublicRoutes exact path="/sign-in" component={SignInView} />
       <PublicRoutes exact path="/inviteme" component={InvitationView} />

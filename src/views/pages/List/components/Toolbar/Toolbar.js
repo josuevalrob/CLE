@@ -1,37 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
+import { useToolbarStyles } from '../../style';
 import { Button } from '@material-ui/core';
 
 import { SearchInput } from '../../../../components';
 
-const useStyles = makeStyles(theme => ({
-  root: {},
-  row: {
-    height: '42px',
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: theme.spacing(1)
-  },
-  spacer: {
-    flexGrow: 1
-  },
-  importButton: {
-    marginRight: theme.spacing(1)
-  },
-  exportButton: {
-    marginRight: theme.spacing(1)
-  },
-  searchInput: {
-    marginRight: theme.spacing(1)
-  }
-}));
 
-const GuestsToolbar = props => {
+const Toolbar = props => {
   const { className, ...rest } = props;
 
-  const classes = useStyles();
+  const classes = useToolbarStyles();
 
   return (
     <div
@@ -59,8 +38,8 @@ const GuestsToolbar = props => {
   );
 };
 
-GuestsToolbar.propTypes = {
+Toolbar.propTypes = {
   className: PropTypes.string
 };
 
-export default GuestsToolbar;
+export default Toolbar;
