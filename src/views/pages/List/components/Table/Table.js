@@ -29,8 +29,8 @@ const TableList = ({list}) => {
                   </TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Email</TableCell>
-                  {/* <TableCell>Location</TableCell>
-                  <TableCell>Phone</TableCell>
+                   <TableCell>Rol</TableCell>
+                  {/*<TableCell>Phone</TableCell>
                   <TableCell>Registration date</TableCell> */}
                 </TableRow>
               </TableHead>
@@ -51,17 +51,14 @@ const TableList = ({list}) => {
                       />
                     </TableCell>
                     <TableCell>
-                      <div className={classes.nameContainer}>
-                          {getInitials(obj.firstName)}
-                      </div>
                         <Typography variant="body1">{obj.firstName}</Typography>
                     </TableCell>
                     <TableCell>{obj.email}</TableCell>
+                    <TableCell>{obj.rol}</TableCell>
                     {/* <TableCell>
                       {obj.address.city}, {obj.address.state},{' '}
                       {obj.address.country}
                     </TableCell>
-                    <TableCell>{obj.phone}</TableCell>
                     <TableCell>
                       {moment(obj.createdAt).format('DD/MM/YYYY')}
                     </TableCell> */}

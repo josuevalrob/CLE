@@ -3,30 +3,28 @@ import { useListStyles } from './style';
 import PropTypes from 'prop-types';
 import { Toolbar, TableList } from './components';
 import { Card, CardActions, CardContent, TablePagination, LinearProgress} from '@material-ui/core';
-import { Query } from 'react-apollo'
-import {allGuest} from './../../../services/Queries'
-import {usePagination} from './../../../handlers/customHook'
-const List = ({history}) => {
-  console.log(history)
+import {getMyQuery} from '../../../services/apiSwitcher';
+import {usePagination} from './../../../handlers/customHook';
+import { useQuery } from '@apollo/react-hooks';
+
+const List = (props) => {
+  const {location:{pathname}, queryStr} = props;
+  const query = queryStr || getMyQuery(pathname.split('/')[1]);
   //* Styles 💅🏻
   const classes = useListStyles();
   //* hooks 🎣
   const paginationHandlers = usePagination(10)
+  const { loading, error, data } = useQuery(query)
   //* Curry 🍛
   //it allow me to add different handlers for different tables in the same component
   const withPagination = Pagination(paginationHandlers)
-
   return (
     <div className={classes.root}>
       <Toolbar />
       <div className={classes.content}>
-        <Query query={allGuest} >
-          {({loading, error, data}) => {
-            if(error) return `Error : ${error}`
-            if(loading) return <LinearProgress /> 
-            return  withPagination(TableList, {list: Object.values(data)[0], classes})
-          }}
-        </Query>
+        {error && `Error : ${error}`}
+        {loading && <LinearProgress /> }
+        {data && withPagination(TableList, {list: Object.values(data)[0], classes})}
       </div>
     </div>
   );
@@ -56,3 +54,4 @@ const Pagination = ({rowsPerPage, page, handlePageChange, handleRowsPerPageChang
         />
       </CardActions>
     </Card>
+

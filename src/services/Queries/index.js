@@ -11,3 +11,14 @@ query getGuests($input: GuestSearch, $limit:Int, $offset:Int) {
   }
 }
 `
+
+export const allUser = gql`
+query getUsers($input: UsersSearch, $limit:Int, $offset:Int) {
+	getUsers(limit:$limit, offset:$offset, input:$input){
+    firstName
+    email
+    id
+    rol
+  }
+}
+`
