@@ -1,0 +1,26 @@
+import React from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import {Link} from 'react-router-dom'
+import { Button } from '@material-ui/core';
+
+export const DeleteButton = ({mutation, id}) => {
+  const [ deleteUser ] = useMutation(mutation);
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    deleteUser({ variables: { id } }).catch(console.log)
+  }
+  return (
+  <Button style={{color:"red"}} onClick={handleDelete}>
+    DELETE
+  </Button>
+  )
+}
+
+export const EditButton = ({url}) => (
+  <Link to={url}>
+    <Button color="primary" variant="outlined" >
+        Edit
+    </Button>
+  </Link>
+)

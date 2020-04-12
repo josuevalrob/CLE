@@ -1,6 +1,11 @@
 import React from 'react';
 import List from '../../components/List'
 import {allGuest} from '../../../services/Queries'
+import {deleteGuest} from '../../../services/mutations'
+import {DeleteButton, EditButton} from './../../components/ActionsButtons'
+
+const DeleteGuest = ({id}) => <DeleteButton mutation={deleteGuest} id={id}/>
+const EditGuest = ({id}) => <EditButton url={`/guest/edit/${id}`} />
 
 const tableFields = {
   columns : [
@@ -19,14 +24,15 @@ const tableFields = {
     {
       name:'status',
       label: 'Estado',
+    }, 
+    {
+      name:'actions',
+      label: 'Acciones',
     }
-  ]
+  ],
+  actions : [EditGuest, DeleteGuest]
 }
 
-const GuestList = () => {
-  return (
-    <List query={allGuest} config={tableFields}   />
-  );
-};
+const GuestList = () => (<List query={allGuest} config={tableFields}   />);
 
 export default GuestList;

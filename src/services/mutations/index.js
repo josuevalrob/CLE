@@ -13,7 +13,7 @@ mutation login($email: String!, $password:String!) {
   }
 }
 `
-export const logoutMutation = gql `mutation logout { logout }`
+export const logoutMutation = gql`mutation logout { logout }`
 
 // ! when do we use this?
 export const signUpMutation = gql`
@@ -36,7 +36,7 @@ mutation signup($input: UserInput){
 }
 `
 
-export const requestAccess = gql `
+export const requestAccess = gql`
 mutation createGuest($input: GuestInput!) {
   createGuest(input: $input) {
     firstName
@@ -44,5 +44,11 @@ mutation createGuest($input: GuestInput!) {
     email
     letter
   }
+}
+`
+
+export const deleteGuest = gql`
+mutation deleteGuest($id: ID!) {
+	deleteGuest(id:$id)
 }
 `

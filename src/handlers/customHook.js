@@ -95,3 +95,15 @@ export const usePagination = rowsPerPager => {
   const handleRowsPerPageChange = event => setRowsPerPage(event.target.value);
   return {rowsPerPage, page, handlePageChange, handleRowsPerPageChange}
 }
+
+// export const useDeleteMutation = id => mutation => {
+//   const [ deleteUser ] = useMutation(mutation);
+
+//   const handleDelete = (e) => {
+//     e.preventDefault();
+//     deleteUser({ variables: { id } }).catch(console.log)
+//   }
+//   return [
+//     handleDelete
+//   ]
+// }

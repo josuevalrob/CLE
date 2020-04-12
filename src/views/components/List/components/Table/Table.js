@@ -59,6 +59,10 @@ const TableList = ({list, config}) => {
                               : <Typography variant="body1">{obj[key]}</Typography>}
                           </TableCell>)
                     }
+                    <TableCell>
+                      { !!config.actions.length &&
+                        config.actions.map(Component => <Component id={obj.id} />)}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
