@@ -1,9 +1,5 @@
 
-export const handleVariables = error => variables => async (event, graphQlCallback) => {
+export const handleVariables = error => variables => (event, graphQlCallback) => {
   event.preventDefault();
-  try {
-    await graphQlCallback({ variables })
-  } catch (event) {
-    error()
-  }
+  graphQlCallback({ variables }).catch(error)
 };
