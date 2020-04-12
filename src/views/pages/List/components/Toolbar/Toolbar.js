@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { useToolbarStyles } from '../../style';
 import { Button } from '@material-ui/core';
-
 import { SearchInput } from '../../../../components';
-
 
 const Toolbar = props => {
   const { className, ...rest } = props;

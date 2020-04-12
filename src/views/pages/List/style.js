@@ -16,7 +16,7 @@ export const useListStyles = makeStyles(theme => ({
   }
 }));
 
-export const useToolbarStyles = makeStyles(theme => ({
+export const useTableStyles = makeStyles(theme => ({
   root: {},
   content: {
     padding: 0
@@ -36,7 +36,7 @@ export const useToolbarStyles = makeStyles(theme => ({
   }
 }));
 
-export const useTableStyles = makeStyles(theme => ({
+export const useToolbarStyles = makeStyles(theme => ({
   root: {},
   row: {
     height: '42px',

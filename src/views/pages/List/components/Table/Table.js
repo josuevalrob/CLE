@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTableStyles } from '../../style';
 import {
-  Card,
-  CardActions,
-  CardContent,
-  Avatar,
   Checkbox,
   Table,
   TableBody,
@@ -16,68 +10,48 @@ import {
   TableHead,
   TableRow,
   Typography,
-  TablePagination
 } from '@material-ui/core';
 
 import { getInitials } from '../../../../helpers';
 
-const TableList = props => {
-  const { className, guests, ...rest } = props;
-
+const TableList = ({list}) => {
   const classes = useTableStyles();
 
-  const [selectedGuests, setSelectedGuests] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [page, setPage] = useState(0);
-
+  // ! should be a hook 🎣
+  const [selectedObj, setSelectedObj] = useState([]);
+  // ! should be a hook 🎣
   const handleSelectAll = event => {
-    const { guests } = props;
-
-    let selectedGuests;
-
+    let selectedObj;
     if (event.target.checked) {
-      selectedGuests = guests.map(guest => guest.id);
+      selectedObj = list.map(guest => guest.id);
     } else {
-      selectedGuests = [];
+      selectedObj = [];
     }
-
-    setSelectedGuests(selectedGuests);
+    setSelectedObj(selectedObj);
   };
-
+  // ! should be a hook 🎣
   const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedGuests.indexOf(id);
-    let newSelectedGuests = [];
+    const selectedIndex = selectedObj.indexOf(id);
+    let newSelectedObj = [];
 
     if (selectedIndex === -1) {
-      newSelectedGuests = newSelectedGuests.concat(selectedGuests, id);
+      newSelectedObj = newSelectedObj.concat(selectedObj, id);
     } else if (selectedIndex === 0) {
-      newSelectedGuests = newSelectedGuests.concat(selectedGuests.slice(1));
-    } else if (selectedIndex === selectedGuests.length - 1) {
-      newSelectedGuests = newSelectedGuests.concat(selectedGuests.slice(0, -1));
+      newSelectedObj = newSelectedObj.concat(selectedObj.slice(1));
+    } else if (selectedIndex === selectedObj.length - 1) {
+      newSelectedObj = newSelectedObj.concat(selectedObj.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelectedGuests = newSelectedGuests.concat(
-        selectedGuests.slice(0, selectedIndex),
-        selectedGuests.slice(selectedIndex + 1)
+      newSelectedObj = newSelectedObj.concat(
+        selectedObj.slice(0, selectedIndex),
+        selectedObj.slice(selectedIndex + 1)
       );
     }
 
-    setSelectedGuests(newSelectedGuests);
+    setSelectedObj(newSelectedObj);
   };
 
-  const handlePageChange = (event, page) => {
-    setPage(page);
-  };
-
-  const handleRowsPerPageChange = event => {
-    setRowsPerPage(event.target.value);
-  };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardContent className={classes.content}>
         <PerfectScrollbar>
           <div className={classes.inner}>
             <Table>
@@ -85,83 +59,66 @@ const TableList = props => {
                 <TableRow>
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedGuests.length === guests.length}
+                      checked={selectedObj.length === list.length}
                       color="primary"
                       indeterminate={
-                        selectedGuests.length > 0 &&
-                        selectedGuests.length < guests.length
+                        selectedObj.length > 0 &&
+                        selectedObj.length < list.length
                       }
                       onChange={handleSelectAll}
                     />
                   </TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Email</TableCell>
-                  <TableCell>Location</TableCell>
+                  {/* <TableCell>Location</TableCell>
                   <TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell>
+                  <TableCell>Registration date</TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {guests.slice(0, rowsPerPage).map(guest => (
+                {list.map(obj => (
                   <TableRow
                     className={classes.tableRow}
                     hover
-                    key={guest.id}
-                    selected={selectedGuests.indexOf(guest.id) !== -1}
+                    key={obj.id}
+                    selected={selectedObj.indexOf(obj.id) !== -1}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
-                        checked={selectedGuests.indexOf(guest.id) !== -1}
+                        checked={selectedObj.indexOf(obj.id) !== -1}
                         color="primary"
-                        onChange={event => handleSelectOne(event, guest.id)}
+                        onChange={event => handleSelectOne(event, obj.id)}
                         value="true"
                       />
                     </TableCell>
                     <TableCell>
                       <div className={classes.nameContainer}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={guest.avatarUrl}
-                        >
-                          {getInitials(guest.name)}
-                        </Avatar>
-                        <Typography variant="body1">{guest.name}</Typography>
+                          {getInitials(obj.firstName)}
                       </div>
+                        <Typography variant="body1">{obj.firstName}</Typography>
                     </TableCell>
-                    <TableCell>{guest.email}</TableCell>
+                    <TableCell>{obj.email}</TableCell>
+                    {/* <TableCell>
+                      {obj.address.city}, {obj.address.state},{' '}
+                      {obj.address.country}
+                    </TableCell>
+                    <TableCell>{obj.phone}</TableCell>
                     <TableCell>
-                      {guest.address.city}, {guest.address.state},{' '}
-                      {guest.address.country}
-                    </TableCell>
-                    <TableCell>{guest.phone}</TableCell>
-                    <TableCell>
-                      {moment(guest.createdAt).format('DD/MM/YYYY')}
-                    </TableCell>
+                      {moment(obj.createdAt).format('DD/MM/YYYY')}
+                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
         </PerfectScrollbar>
-      </CardContent>
-      <CardActions className={classes.actions}>
-        <TablePagination
-          component="div"
-          count={guests.length}
-          onChangePage={handlePageChange}
-          onChangeRowsPerPage={handleRowsPerPageChange}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
-        />
-      </CardActions>
-    </Card>
+
   );
 };
 
 TableList.propTypes = {
   className: PropTypes.string,
-  guests: PropTypes.array.isRequired
+  list: PropTypes.array.isRequired
 };
 
 export default TableList;

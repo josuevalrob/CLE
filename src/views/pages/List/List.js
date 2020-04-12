@@ -28,7 +28,7 @@ const List = ({history}) => {
             console.log(data)
             if(error) return `Error : ${error}`
             if(loading) return `Loading ...`
-            return  withPagination(TableList, {users: data.getClientes, classes})
+            return  withPagination(TableList, {list: Object.values(data)[0], classes})
           }}
         </Query>
       </div>
@@ -51,7 +51,7 @@ const Pagination = ({rowsPerPage, page, handlePageChange, handleRowsPerPageChang
       <CardActions className={props.classes.actions}>
         <TablePagination
           component="div"
-          count={props.users.length} //! this shuold be dinamic
+          count={props.list.length}
           onChangePage={handlePageChange}
           onChangeRowsPerPage={handleRowsPerPageChange}
           page={page}
