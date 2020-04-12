@@ -4,7 +4,6 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTableStyles } from '../../style';
 import {Checkbox,Table,TableBody,TableCell,TableHead,TableRow,Typography,} from '@material-ui/core';
 import {useTableSelectors} from './../../../../../handlers/customHook'
-import { getInitials } from '../../../../helpers';
 
 const TableList = ({list}) => {
   const classes = useTableStyles();

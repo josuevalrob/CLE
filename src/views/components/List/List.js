@@ -3,13 +3,10 @@ import { useListStyles } from './style';
 import PropTypes from 'prop-types';
 import { Toolbar, TableList } from './components';
 import { Card, CardActions, CardContent, TablePagination, LinearProgress} from '@material-ui/core';
-import {getMyQuery} from '../../../services/apiSwitcher';
 import {usePagination} from './../../../handlers/customHook';
 import { useQuery } from '@apollo/react-hooks';
 
-const List = (props) => {
-  const {location:{pathname}, queryStr} = props;
-  const query = queryStr || getMyQuery(pathname.split('/')[1]);
+const List = ({query}) => {
   //* Styles 💅🏻
   const classes = useListStyles();
   //* hooks 🎣

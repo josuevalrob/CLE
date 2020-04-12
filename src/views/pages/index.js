@@ -8,5 +8,5 @@ export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';
 export { default as Invitation } from './Invitation';
 export { default as Typography } from './Typography';
-export { default as UserList } from './UserList';
-export { default as List } from './List';
+export { default as UserList } from './Users';
+export { default as GuestList } from './Guests';
