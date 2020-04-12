@@ -1,55 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { useTableStyles } from '../../style';
-import {
-  Checkbox,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-} from '@material-ui/core';
-
+import {Checkbox,Table,TableBody,TableCell,TableHead,TableRow,Typography,} from '@material-ui/core';
+import {useTableSelectors} from './../../../../../handlers/customHook'
 import { getInitials } from '../../../../helpers';
 
 const TableList = ({list}) => {
   const classes = useTableStyles();
-
-  // ! should be a hook 🎣
-  const [selectedObj, setSelectedObj] = useState([]);
-  // ! should be a hook 🎣
-  const handleSelectAll = event => {
-    let selectedObj;
-    if (event.target.checked) {
-      selectedObj = list.map(guest => guest.id);
-    } else {
-      selectedObj = [];
-    }
-    setSelectedObj(selectedObj);
-  };
-  // ! should be a hook 🎣
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedObj.indexOf(id);
-    let newSelectedObj = [];
-
-    if (selectedIndex === -1) {
-      newSelectedObj = newSelectedObj.concat(selectedObj, id);
-    } else if (selectedIndex === 0) {
-      newSelectedObj = newSelectedObj.concat(selectedObj.slice(1));
-    } else if (selectedIndex === selectedObj.length - 1) {
-      newSelectedObj = newSelectedObj.concat(selectedObj.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelectedObj = newSelectedObj.concat(
-        selectedObj.slice(0, selectedIndex),
-        selectedObj.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelectedObj(newSelectedObj);
-  };
-
+  const [selectedObj, handleSelectOne, handleSelectAll] = useTableSelectors(list)
 
   return (
         <PerfectScrollbar>
@@ -117,7 +76,6 @@ const TableList = ({list}) => {
 };
 
 TableList.propTypes = {
-  className: PropTypes.string,
   list: PropTypes.array.isRequired
 };
 

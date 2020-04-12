@@ -6,8 +6,6 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 // import Cookies from 'js-cookie'
 
-
-
 const Client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
