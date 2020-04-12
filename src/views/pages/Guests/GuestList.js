@@ -2,10 +2,31 @@ import React from 'react';
 import List from '../../components/List'
 import {allGuest} from '../../../services/Queries'
 
-const UserList = () => {
+const tableFields = {
+  columns : [
+    {
+      name:'firstName',
+      label: 'Nombre',
+    },
+    {
+      name:'email',
+      label: 'E-Mail',
+    },
+    {
+      name:'rol',
+      label: 'Rol',
+    },
+    {
+      name:'status',
+      label: 'Estado',
+    }
+  ]
+}
+
+const GuestList = () => {
   return (
-    <List query={allGuest}  />
+    <List query={allGuest} config={tableFields}   />
   );
 };
 
-export default UserList;
+export default GuestList;

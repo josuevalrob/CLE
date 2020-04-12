@@ -5,7 +5,7 @@ import { useTableStyles } from '../../style';
 import {Checkbox,Table,TableBody,TableCell,TableHead,TableRow,Typography,} from '@material-ui/core';
 import {useTableSelectors} from './../../../../../handlers/customHook'
 
-const TableList = ({list}) => {
+const TableList = ({list, config}) => {
   const classes = useTableStyles();
   const [selectedObj, handleSelectOne, handleSelectAll] = useTableSelectors(list)
 
@@ -26,15 +26,15 @@ const TableList = ({list}) => {
                       onChange={handleSelectAll}
                     />
                   </TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
-                   <TableCell>Rol</TableCell>
-                  {/*<TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell> */}
+                  {
+                    config.columns.map(({label, name}) =>
+                    <TableCell key={name}>{label}</TableCell>)
+                  }
                 </TableRow>
               </TableHead>
               <TableBody>
-                {list.map(obj => (
+                {list
+                  .map(obj => (
                   <TableRow
                     className={classes.tableRow}
                     hover
@@ -49,18 +49,16 @@ const TableList = ({list}) => {
                         value="true"
                       />
                     </TableCell>
-                    <TableCell>
-                        <Typography variant="body1">{obj.firstName}</Typography>
-                    </TableCell>
-                    <TableCell>{obj.email}</TableCell>
-                    <TableCell>{obj.rol}</TableCell>
-                    {/* <TableCell>
-                      {obj.address.city}, {obj.address.state},{' '}
-                      {obj.address.country}
-                    </TableCell>
-                    <TableCell>
-                      {moment(obj.createdAt).format('DD/MM/YYYY')}
-                    </TableCell> */}
+                    {
+                      Object.keys(obj)
+                        .filter(key => config.columns.map(({name}) => name).includes(key))
+                        .map((key, i) =>
+                          <TableCell key={i}>
+                            { !!i //check is not the first element
+                              ? obj[key]
+                              : <Typography variant="body1">{obj[key]}</Typography>}
+                          </TableCell>)
+                    }
                   </TableRow>
                 ))}
               </TableBody>

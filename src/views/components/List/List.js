@@ -6,7 +6,7 @@ import { Card, CardActions, CardContent, TablePagination, LinearProgress} from '
 import {usePagination} from './../../../handlers/customHook';
 import { useQuery } from '@apollo/react-hooks';
 
-const List = ({query}) => {
+const List = ({query, config}) => {
   //* Styles 💅🏻
   const classes = useListStyles();
   //* hooks 🎣
@@ -19,9 +19,9 @@ const List = ({query}) => {
     <div className={classes.root}>
       <Toolbar />
       <div className={classes.content}>
-        {error && `Error : ${error}`}
+        {error && error}
         {loading && <LinearProgress /> }
-        {data && withPagination(TableList, {list: Object.values(data)[0], classes})}
+        {data && withPagination(TableList, {list: Object.values(data)[0], classes, config})}
       </div>
     </div>
   );
