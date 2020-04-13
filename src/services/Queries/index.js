@@ -21,6 +21,7 @@ query getGuest($id: ID!) {
     email
     id
     rol
+    letter
     status
   }
 }

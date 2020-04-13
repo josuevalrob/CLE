@@ -70,11 +70,11 @@ CustomForm.propTypes = {
       label: PropTypes.string,
       type: PropTypes.string,
     })).isRequired,
-    header: PropTypes.shape(PropTypes.shape({
+    header: PropTypes.shape({
       title: PropTypes.string,
       subtitle: PropTypes.string,
-    }))
-  }),
+    }).isRequired
+  }).isRequired,
 };
 
 export default CustomForm

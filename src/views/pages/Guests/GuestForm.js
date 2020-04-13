@@ -32,8 +32,10 @@ const formConfig = {
 
 const Guest = props => {
   const { history, match:{params:{id}} } = props;
-  const handleComplete = () => history.push('/guest')
+  const root = '/guests'
+  const handleComplete = () => history.push(root)
   const formProps = {
+    root,
     history,
     schema,
     mutation:editGuest,
