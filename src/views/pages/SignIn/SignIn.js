@@ -12,7 +12,6 @@ import {withAuthConsumer} from './../../../handlers/contexts/AuthStore'
 
 const SignIn = ({ onUserChange }) => {
   const classes = useStyles();
-  // TODO create a custom hook 🎣
   const {formState, handleChange, reset} = useForm({email:'',password:''}, schema);
   const handleSignIn = handleVariables(reset)(formState.values);
 

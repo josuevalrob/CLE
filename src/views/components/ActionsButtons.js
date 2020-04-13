@@ -17,10 +17,10 @@ export const DeleteButton = ({mutation, id}) => {
   )
 }
 
-export const EditButton = ({url}) => (
+export const LinkButton = ({url, label}) => (
   <Link to={url}>
     <Button color="primary" variant="outlined" >
-        Edit
+        {label}
     </Button>
   </Link>
 )

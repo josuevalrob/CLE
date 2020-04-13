@@ -2,11 +2,10 @@ import React from 'react';
 import List from '../../components/List'
 import {allGuest} from '../../../services/Queries'
 import {deleteGuest} from '../../../services/mutations'
-import {DeleteButton, EditButton} from './../../components/ActionsButtons'
-import { Button } from '@material-ui/core';
+import {DeleteButton, LinkButton} from './../../components/ActionsButtons'
 
 const DeleteGuest = ({id}) => <DeleteButton mutation={deleteGuest} id={id}/>
-const EditGuest = ({id}) => <EditButton url={`/guest/edit/${id}`} />
+const EditGuest = ({id}) => <LinkButton url={`/guest/edit/${id}`} label='Ediar'/>
 
 const tableFields = {
   columns : [
@@ -33,7 +32,7 @@ const tableFields = {
   ],
   actions : [EditGuest, DeleteGuest],
   buttons: [
-    () => <Button color="primary"variant="contained">Add guest</Button>,
+    () => <LinkButton url={`/guest/add`} label='Añadir Invitado'/>
   ],
 }
 

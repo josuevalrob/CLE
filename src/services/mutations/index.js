@@ -52,6 +52,33 @@ mutation deleteGuest($id: ID!) {
 	deleteGuest(id:$id)
 }
 `
+export const editGuest = gql`
+mutation updateGuest($input: GuestInput!) {
+  updateGuest(input: $input) {
+    id
+    firstName
+    id
+    email
+    letter
+  }
+}
+`
+
+export const editUser = gql`
+mutation updateUser($input: UserUpdate!) {
+  updateUser(input: $input) {
+    id
+    rol
+    firstName
+    lastName
+    phone
+    Country
+    City
+    birth
+    profilePhoto
+  }
+}
+`
 
 export const deleteUser = gql`
 mutation deleteUser($id: ID!) {
