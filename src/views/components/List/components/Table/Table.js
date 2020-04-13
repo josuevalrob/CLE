@@ -60,8 +60,8 @@ const TableList = ({list, config}) => {
                           </TableCell>)
                     }
                     <TableCell>
-                      { !!config.actions.length &&
-                        config.actions.map(Component => <Component id={obj.id} />)}
+                      { !!config.actions &&
+                        config.actions.map((Component, i)=> <Component key={i} id={obj.id} />)}
                     </TableCell>
                   </TableRow>
                 ))}

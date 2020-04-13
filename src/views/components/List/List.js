@@ -17,7 +17,7 @@ const List = ({query, config}) => {
   const withPagination = Pagination(paginationHandlers)
   return (
     <div className={classes.root}>
-      <Toolbar />
+      <Toolbar buttons={config.buttons} />
       <div className={classes.content}>
         {error && error}
         {loading && <LinearProgress /> }
@@ -28,7 +28,12 @@ const List = ({query, config}) => {
 };
 
 List.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  config: PropTypes.shape({
+    // columns: PropTypes.string,
+    // actions: PropTypes.number,
+    buttons: PropTypes.arrayOf(PropTypes.func)
+  }),
 };
 
 export default List;

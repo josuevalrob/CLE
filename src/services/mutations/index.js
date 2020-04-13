@@ -52,3 +52,9 @@ mutation deleteGuest($id: ID!) {
 	deleteGuest(id:$id)
 }
 `
+
+export const deleteUser = gql`
+mutation deleteUser($id: ID!) {
+	deleteUser(id:$id)
+}
+`
