@@ -7,21 +7,33 @@ export const FormWithData = (props) => (
   <Query query={props.query} variables={{id:props.id}}>
     {({loading, error, data, refetch}) => {
       const handleComplete = () => refetch().then((x)=> props.history.push('/users'))
+      debugger
       if(error) return `Error : ${error}` ;//* error validation
       if(loading) return <LinearProgress /> ;
-      return <Form data={data.getGust} done={handleComplete} {...props} />
+      return !!data
+        ? <Form data={Object.values(data)[0]} done={handleComplete} {...props} /> 
+        : null
     }}
   </Query>
 )
 
 FormWithData.propTypes = {
+  id: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
   mutation: PropTypes.object.isRequired,
-  config: PropTypes.objectOf.isRequired,
   schema: PropTypes.object,
-  update: PropTypes.func,
-  id: PropTypes.string,
+  //* Config props are required
+  config: PropTypes.shape({
+    fields: PropTypes.arrayOf(PropTypes.shape({
+      key: PropTypes.string,
+      label: PropTypes.string,
+      type: PropTypes.string,
+    })),
+    header: PropTypes.shape(PropTypes.shape({
+      title: PropTypes.string,
+      subtitle: PropTypes.string,
+    }))
+  }),
 };
 
 export { default } from './Form';

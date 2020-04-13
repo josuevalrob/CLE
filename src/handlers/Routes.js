@@ -79,7 +79,7 @@ const Routes = () => {
         path="/settings"
       />
       <RouteWithLayout exact path="/guests" component={GuestListView} layout={MainLayout} />
-      <RouteWithLayout exact path="/guest/edit:id" component={GuestFormView} layout={MainLayout} />
+      <RouteWithLayout exact path="/guest/edit/:id" component={GuestFormView} layout={MinimalLayout} />
       <RouteWithLayout
         component={GuestFormView}
         exact

@@ -27,7 +27,7 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
       <form className={classes.form} onSubmit={(e)=>handleForm(e, graphQlCallback)} >
         <HeaderForm {...config.header} style={classes.title}/>
         {config.fields.map(({key, label, type})=>
-          <TextField name={key}
+          <TextField name={key} key={key}
             className={classes.textField}
             error={hasError(key)}
             fullWidth
@@ -70,11 +70,11 @@ CustomForm.propTypes = {
       label: PropTypes.string,
       type: PropTypes.string,
     })).isRequired,
-    header: PropTypes.arrayOf(PropTypes.shape({
+    header: PropTypes.shape(PropTypes.shape({
       title: PropTypes.string,
       subtitle: PropTypes.string,
-    })).isRequired
-  }).isRequired,
+    }))
+  }),
 };
 
 export default CustomForm
