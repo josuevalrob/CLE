@@ -27,3 +27,14 @@ mutation updateGuest($input: GuestInput!) {
   }
 }
 `
+
+export const createGuest = gql`
+mutation createGuest($input: GuestInput!) {
+  createGuest(input: $input) {
+    firstName
+    id
+    email
+    letter
+  }
+}
+`

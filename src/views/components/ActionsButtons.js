@@ -17,9 +17,9 @@ export const DeleteButton = ({mutation, id}) => {
   )
 }
 
-export const LinkButton = ({url, label}) => (
+export const LinkButton = ({url, label, color = "primary"}) => (
   <Link to={url}>
-    <Button color="primary" variant="outlined" >
+    <Button color={color} variant="outlined" >
         {label}
     </Button>
   </Link>

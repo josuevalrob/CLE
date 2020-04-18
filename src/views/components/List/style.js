@@ -31,9 +31,14 @@ export const useTableStyles = makeStyles(theme => ({
   avatar: {
     marginRight: theme.spacing(2)
   },
+  headerCell:{
+    // margin: 'auto'
+  },
   actions: {
-    justifyContent: 'flex-end'
-  }
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
 }));
 
 export const useToolbarStyles = makeStyles(theme => ({

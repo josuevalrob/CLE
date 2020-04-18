@@ -1,11 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import {getGuest} from '../../../services/Queries'
-import {editGuest} from '../../../services/mutations'
+import {getGuest, allUser} from '../../../services/Queries'
+import {editGuest, createGuest} from '../../../services/mutations'
 import Form, {FormWithData} from '../../components/Form'
 import {schema} from './GuestFormValidation'
+import { useQuery } from '@apollo/react-hooks';
+import { LinearProgress } from '@material-ui/core';
 
-const formConfig = {
+const formConfig = (id, admins) => ({
   fields: [
     {
       key: 'firstName',
@@ -45,32 +47,48 @@ const formConfig = {
         },
       ]
     },
+    {
+      key: 'owner',
+      label: 'Gestor',
+      type:"select",
+      helper: 'Esta acción notificará vía mail, al nuevo Gestor',
+      options: admins.map(obj => ({
+        key: obj.id,
+        label: `${obj.firstName} ${obj.lastName} - ${obj.email}`,
+      }))
+    },
   ],
   header: {
-    title:'Crear un nuevo Guest',
-    subtitle:'El e-mail es requerido para notifiaciones',
+    title: !!id ? 'Editar Invitado' : 'Crear un nuevo Guest',
+    subtitle: !!id ? 'No se puede modificar el correo' : 'El e-mail es requerido para notifiaciones',
   }
-}
+})
 
 
 const Guest = props => {
   const { history, match:{params:{id}} } = props;
   const root = '/guests'
   const handleComplete = () => history.push(root)
+
+  // ! THIS SHOULD BE A HOOK 🎣
+  const { loading, error, data } = useQuery(allUser, {variables: { rol: 'admin' }})
+
+  if(error) return <div>{error.message}</div>; //no user with admin rol
+
+  if (loading) return <LinearProgress />;
+
   const formProps = {
     root,
     history,
     schema,
-    mutation:editGuest,
-    config: !!id
-      ? {
-          ...formConfig,
-          header: {title:'Editar Invitado', subtitle: 'No se puede modificar el correo'}
-        }
-      : formConfig,
+    mutation: !!id ? editGuest : createGuest,
+    config: formConfig(id, Object.values(data)[0]),
   }
+
   return !!id //if we have an id, let's fetch the data for it.
+  // edit guest
     ? <FormWithData id={id} query={getGuest} {...formProps}/>
+  // new guest
     : <Form {...formProps} done={handleComplete} />
 };
 

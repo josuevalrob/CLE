@@ -5,7 +5,8 @@ import {deleteGuest} from '../../../services/mutations'
 import {DeleteButton, LinkButton} from './../../components/ActionsButtons'
 
 const DeleteGuest = ({id}) => <DeleteButton mutation={deleteGuest} id={id}/>
-const EditGuest = ({id}) => <LinkButton url={`/guest/edit/${id}`} label='Editar'/>
+const EditGuest = ({id}) => <LinkButton color='default' url={`/guest/edit/${id}`} label='Editar'/>
+const InviteGuest = ({id}) => <LinkButton  url={`/guest/invite/${id}`} label='Invitar 📧'/>
 
 const tableFields = {
   columns : [
@@ -30,7 +31,7 @@ const tableFields = {
       label: 'Acciones',
     }
   ],
-  actions : [EditGuest, DeleteGuest],
+  actions : [InviteGuest, EditGuest, DeleteGuest],
   buttons: [
     () => <LinkButton url={`/guest/add`} label='Añadir Invitado'/>
   ],

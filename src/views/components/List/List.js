@@ -19,7 +19,7 @@ const List = ({query, config}) => {
     <div className={classes.root}>
       <Toolbar buttons={config.buttons} />
       <div className={classes.content}>
-        {error && error}
+        {error && <div>{error.message}</div>}
         {loading && <LinearProgress /> }
         {data && withPagination(TableList, {list: Object.values(data)[0], classes, config})}
       </div>

@@ -28,13 +28,12 @@ const TableList = ({list, config}) => {
                   </TableCell>
                   {
                     config.columns.map(({label, name}) =>
-                    <TableCell key={name}>{label}</TableCell>)
+                    <TableCell className={classes.headerCell} key={name}>{label}</TableCell>)
                   }
                 </TableRow>
               </TableHead>
               <TableBody>
-                {list
-                  .map(obj => (
+                {list.map(obj => (
                   <TableRow
                     className={classes.tableRow}
                     hover
@@ -59,9 +58,10 @@ const TableList = ({list, config}) => {
                               : <Typography variant="body1">{obj[key]}</Typography>}
                           </TableCell>)
                     }
-                    <TableCell>
+                    <TableCell className={classes.actions}>
                       { !!config.actions &&
-                        config.actions.map((Component, i)=> <Component key={i} id={obj.id} />)}
+                        config.actions.map((Component, i)=>
+                        <Component key={i} id={obj.id} />)}
                     </TableCell>
                   </TableRow>
                 ))}
