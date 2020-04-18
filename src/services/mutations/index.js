@@ -1,5 +1,6 @@
 // TODO: this file should be just for import/export
 import gql from "graphql-tag"
+export * from './guest.mutation';
 // userInput: {email:"pepe@user.com", password:"1234"}
 export const signInMutation = gql`
 mutation login($email: String!, $password:String!) {
@@ -36,33 +37,6 @@ mutation signup($input: UserInput){
 }
 `
 
-export const requestAccess = gql`
-mutation createGuest($input: GuestInput!) {
-  createGuest(input: $input) {
-    firstName
-    id
-    email
-    letter
-  }
-}
-`
-
-export const deleteGuest = gql`
-mutation deleteGuest($id: ID!) {
-	deleteGuest(id:$id)
-}
-`
-export const editGuest = gql`
-mutation updateGuest($input: GuestInput!) {
-  updateGuest(input: $input) {
-    id
-    firstName
-    id
-    email
-    letter
-  }
-}
-`
 
 export const editUser = gql`
 mutation updateUser($input: UserUpdate!) {

@@ -7,8 +7,8 @@ import { Button } from '@material-ui/core';
 
 const tableFields = {
   actions : [
-    ({id}) => <DeleteButton mutation={deleteUser} id={id}/>,
-    ({id}) => <LinkButton url={`/user/edit/${id}`} />
+    ({id}) => <LinkButton url={`/user/edit/${id}`} label='Editar' />,
+    ({id}) => <DeleteButton mutation={deleteUser} id={id}/>
   ],
   buttons: [
     () => <Button>Import</Button>,

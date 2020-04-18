@@ -90,5 +90,16 @@ export const useStyles = makeStyles(theme => ({
   },
   signUpButton: {
     margin: theme.spacing(2, 0)
+  },
+  formControl: {
+    marginTop: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  selectLabel:{
+    backgroundColor: '#f5f6f8',
+    padding: '0px 5px'
   }
 }));

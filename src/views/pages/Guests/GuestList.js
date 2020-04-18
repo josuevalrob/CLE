@@ -5,7 +5,7 @@ import {deleteGuest} from '../../../services/mutations'
 import {DeleteButton, LinkButton} from './../../components/ActionsButtons'
 
 const DeleteGuest = ({id}) => <DeleteButton mutation={deleteGuest} id={id}/>
-const EditGuest = ({id}) => <LinkButton url={`/guest/edit/${id}`} label='Ediar'/>
+const EditGuest = ({id}) => <LinkButton url={`/guest/edit/${id}`} label='Editar'/>
 
 const tableFields = {
   columns : [

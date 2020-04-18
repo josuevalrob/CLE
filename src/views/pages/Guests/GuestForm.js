@@ -15,12 +15,35 @@ const formConfig = {
     {
       key: 'letter',
       label: 'Carta',
-      type:"text"
+      type:"textArea"
     },
     {
       key: 'status',
       label: 'Status',
-      type:"select"
+      type:"select",
+      helper: 'Esta acción no enviará correo electrónicos',
+      options: [
+        {
+          key: 'STANDBY',
+          label: 'En espera'
+        },
+        {
+          key: 'SEND',
+          label: 'Enviado'
+        },
+        {
+          key: 'ACCEPTED',
+          label: 'Aceptado'
+        },
+        {
+          key: 'DENIED',
+          label: 'Denegado',
+        },
+        {
+          key: 'DELETED',
+          label: 'Eliminado',
+        },
+      ]
     },
   ],
   header: {
