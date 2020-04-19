@@ -103,7 +103,12 @@ const Guest = props => {
 
   return !!id //if we have an id, let's fetch the data for it.
   // edit guest
-    ? <FormWithData id={id} query={getGuest} {...formProps}/>
+    ? <FormWithData
+        id={id}
+        query={getGuest}
+        dataHandler={arr => ({...arr, owner: arr.owner.id,})}
+        {...formProps}
+      />
   // new guest
     : <Form {...formProps} done={handleComplete} />
 };

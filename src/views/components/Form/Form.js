@@ -23,9 +23,9 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
   <AllPageForm classes={classes} goBack={() => history.goBack()} >
     <Mutation mutation={mutation} onCompleted={done} >
     { (graphQlCallback, { loading, error }) => {
-      if(error) {
-        debugger
-      }
+      // if(error) {
+      //   debugger
+      // }
       return (
       <form className={classes.form} onSubmit={(e)=>handleForm(e, graphQlCallback)} >
         <HeaderForm {...config.header} style={classes.title}/>

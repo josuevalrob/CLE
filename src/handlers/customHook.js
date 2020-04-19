@@ -22,7 +22,6 @@ export const useForm = (values, schema) => {
 
   const handleChange = event => {
     event.persist();
-    debugger
     setFormState(formState => ({
       ...formState,
       values: {

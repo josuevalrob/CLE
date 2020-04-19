@@ -27,6 +27,7 @@ query getGuest($id: ID!) {
     letter
     status
     owner {
+      id
       firstName
     }
   }
@@ -42,6 +43,7 @@ query getGuest($id: ID!) {
     rol
     status
     owner {
+      id
       firstName
     }
   }
