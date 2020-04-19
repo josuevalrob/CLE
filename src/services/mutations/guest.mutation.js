@@ -11,6 +11,16 @@ mutation createGuest($input: GuestInput!) {
 }
 `
 
+export const inviteGuest = gql`
+mutation sendGuest($email: String!, $letter:String) {
+  sendGuest(email:$email,letter:$letter){
+    firstName
+    id
+    status
+  }
+}
+`
+
 export const deleteGuest = gql`
 mutation deleteGuest($id: ID!) {
 	deleteGuest(id:$id)

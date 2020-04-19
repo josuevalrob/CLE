@@ -19,6 +19,10 @@ const tableFields = {
       label: 'E-Mail',
     },
     {
+      name:'owner.firstName',
+      label: 'Gestor asignado',
+    },
+    {
       name:'rol',
       label: 'Rol',
     },

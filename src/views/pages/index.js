@@ -12,3 +12,4 @@ export { default as UserList } from './Users/UserList';
 export { default as UserForm } from './Users/UserForm';
 export { default as GuestList } from './Guests/GuestList';
 export { default as GuestForm } from './Guests/GuestForm';
+export { default as GuestInvite } from './Guests/GuestInvite';

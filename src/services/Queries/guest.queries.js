@@ -6,12 +6,12 @@ query getGuests($input: GuestSearch, $limit:Int, $offset:Int) {
     firstName
     email
     id
-    rol
-    status
     owner {
       id
       firstName
     }
+    rol
+    status
   }
 }
 `
@@ -26,6 +26,24 @@ query getGuest($id: ID!) {
     rol
     letter
     status
+    owner {
+      firstName
+    }
+  }
+}
+`
+
+export const getGuestNoLetter = gql`
+query getGuest($id: ID!) {
+	getGuest(id:$id){
+    firstName
+    email
+    id
+    rol
+    status
+    owner {
+      firstName
+    }
   }
 }
 `

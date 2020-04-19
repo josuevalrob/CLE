@@ -9,6 +9,7 @@ export const FormWithData = (props) =>{
   const { loading, error, data, refetch } = useQuery(props.query, {variables: { id:props.id }})
   const handleComplete = () => refetch().then((x)=> props.history.push(props.root))
 
+  debugger
   if(error) return <Redirect to={props.root}/>;//* error validation
   if (loading) return <LinearProgress />;
   return <Form data={Object.values(data)[0]} done={handleComplete} {...props} />;
@@ -19,7 +20,7 @@ FormWithData.propTypes = {
   history: PropTypes.object.isRequired,
   mutation: PropTypes.object.isRequired,
   schema: PropTypes.object,
-//   //* Config props are required
+  //* Config props are required
   config: PropTypes.shape({
     fields: PropTypes.arrayOf(PropTypes.shape({
       key: PropTypes.string,

@@ -12,6 +12,7 @@ import {
   UserForm as UserFormView,
   GuestList as GuestListView,
   GuestForm as GuestFormView,
+  GuestInvite as GuestInviteView,
   Typography as TypographyView,
   Icons as IconsView,
   Account as AccountView,
@@ -80,6 +81,7 @@ const Routes = () => {
       />
       <RouteWithLayout exact path="/guests" component={GuestListView} layout={MainLayout} />
       <RouteWithLayout exact path="/guest/edit/:id" component={GuestFormView} layout={MinimalLayout} />
+      <RouteWithLayout exact path="/guest/invite/:id" component={GuestInviteView} layout={MinimalLayout} />
       <RouteWithLayout
         component={GuestFormView}
         exact

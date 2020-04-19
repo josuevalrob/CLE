@@ -20,6 +20,22 @@ const formConfig = (id, admins) => ({
       type:"textArea"
     },
     {
+      key: 'rol',
+      label: 'Rol/Tipo de usuario',
+      type:"select",
+      helper: 'Esta acción tiene repercuciones de seguridad',
+      options: [
+        {
+          key: 'admin',
+          label: 'Administrador'
+        },
+        {
+          key: 'patron',
+          label: 'Patrocinador'
+        },
+      ]
+    },
+    {
       key: 'status',
       label: 'Status',
       type:"select",
@@ -67,8 +83,8 @@ const formConfig = (id, admins) => ({
 
 const Guest = props => {
   const { history, match:{params:{id}} } = props;
-  const root = '/guests'
-  const handleComplete = () => history.push(root)
+  const Guestroot = '/guests'
+  const handleComplete = () => history.push(Guestroot)
 
   // ! THIS SHOULD BE A HOOK 🎣
   const { loading, error, data } = useQuery(allUser, {variables: { rol: 'admin' }})
@@ -78,7 +94,7 @@ const Guest = props => {
   if (loading) return <LinearProgress />;
 
   const formProps = {
-    root,
+    root:Guestroot,
     history,
     schema,
     mutation: !!id ? editGuest : createGuest,

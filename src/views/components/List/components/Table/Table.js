@@ -8,7 +8,6 @@ import {useTableSelectors} from './../../../../../handlers/customHook'
 const TableList = ({list, config}) => {
   const classes = useTableStyles();
   const [selectedObj, handleSelectOne, handleSelectAll] = useTableSelectors(list)
-
   return (
         <PerfectScrollbar>
           <div className={classes.inner}>
@@ -33,7 +32,9 @@ const TableList = ({list, config}) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {list.map(obj => (
+                {list.map(obj => {
+                  console.log(obj)
+                  return (
                   <TableRow
                     className={classes.tableRow}
                     hover
@@ -64,7 +65,7 @@ const TableList = ({list, config}) => {
                         <Component key={i} id={obj.id} />)}
                     </TableCell>
                   </TableRow>
-                ))}
+                )})}
               </TableBody>
             </Table>
           </div>

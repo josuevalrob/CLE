@@ -1,19 +1,11 @@
 
 export const schema = {
-    firstName: {
+    letter: {
       presence: { 
         allowEmpty: false, message: 'is required' 
       },
       length: {
-        maximum: 32
-      }
-    },
-    letter: {
-      length: {
         maximum: 600,
       }
-    },
-    status: {
-      inclusion: ['STANDBY','SEND','ACCEPTED','DENIED','DELETED']
-    },
+    },    
   };

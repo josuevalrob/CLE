@@ -15,7 +15,7 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
     schema
   );
 
-  const handleForm = handleVariables()(formState.values);
+  const handleForm = handleVariables(console.log)(formState.values);
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
 
@@ -23,15 +23,19 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
   <AllPageForm classes={classes} goBack={() => history.goBack()} >
     <Mutation mutation={mutation} onCompleted={done} >
     { (graphQlCallback, { loading, error }) => {
+      if(error) {
+        debugger
+      }
       return (
       <form className={classes.form} onSubmit={(e)=>handleForm(e, graphQlCallback)} >
         <HeaderForm {...config.header} style={classes.title}/>
         <FormControl error={!!error} fullWidth>
-        {!!error && <FormHelperText>{error}</FormHelperText>}
-        {config.fields.map(({key, label, type, options, helper})=>
+        {!!error && <FormHelperText>{error.message}</FormHelperText>}
+        {config.fields.map(({key, label, type, options, helper, disabled})=>
           ! type ? null
           : type === 'text' || type === 'textArea' ?
             <TextField name={key} key={key}
+              disabled={disabled}
               className={classes.textField}
               error={hasError(key)}
               fullWidth
@@ -53,7 +57,7 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
                 labelId={key}
                 displayEmpty
                 className={classes.selectEmpty}
-                value={formState.values[key]}
+                value={formState.values[key] || ''}
                 onChange={handleChange}
               >
                 <MenuItem value=""><em>Ninguno</em></MenuItem>
