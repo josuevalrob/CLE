@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react';
 import validate from 'validate.js';
 
 export const useForm = (values, schema) => {
+  // refactor clean underscore type values
+  Object.keys(values).forEach(key => {key[0] === '_' && delete values[key]})
   const initialState = {
     values,
     isValid: false,

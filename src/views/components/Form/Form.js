@@ -15,7 +15,7 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
     schema
   );
 
-  const handleForm = handleVariables(console.log)(formState.values);
+  const handleForm = handleVariables(console.log)({input:formState.values});
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
 

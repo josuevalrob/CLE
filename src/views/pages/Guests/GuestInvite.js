@@ -54,7 +54,12 @@ const Guest = props => {
     mutation: inviteGuest,
     config: formConfig,
   }
-  return <FormWithData id={id} query={getGuestNoLetter} {...formProps}/>
+  return <FormWithData 
+          id={id} 
+          query={getGuestNoLetter} 
+          {...formProps}
+          dataHandler={arr => ({...arr, owner: arr.owner.id,})}
+        />
 };
 
 

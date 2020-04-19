@@ -33,7 +33,6 @@ const TableList = ({list, config}) => {
               </TableHead>
               <TableBody>
                 {list.map(obj => {
-                  console.log(obj)
                   return (
                   <TableRow
                     className={classes.tableRow}

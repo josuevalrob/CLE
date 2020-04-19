@@ -50,6 +50,12 @@ const Routes = () => {
         path="/user/add"
       />
       <RouteWithLayout
+        component={UserFormView}
+        exact
+        layout={MinimalLayout}
+        path="/user/edit/:id"
+      />
+      <RouteWithLayout
         component={ProductListView}
         exact
         layout={MainLayout}

@@ -14,7 +14,7 @@ export const FormWithData = (props) =>{
   const handleByParent = flatterZero(props.dataHandler)
 
   //* Return
-  if(error) return <Redirect to={props.root}/>;//* error validation
+  if(error) return <Redirect to={props.root}/>; //* error validation
   if (loading) return <LinearProgress />;
   return <Form data={handleByParent(data)} done={handleComplete} {...props} />;
 }
@@ -36,6 +36,7 @@ FormWithData.propTypes = {
       subtitle: PropTypes.string,
     }).isRequired
   }).isRequired,
+  dataHandler: PropTypes.func.isRequired
 };
 
 export { default } from './Form';

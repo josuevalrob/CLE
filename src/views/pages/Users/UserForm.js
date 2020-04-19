@@ -62,10 +62,11 @@ const formConfig = {
 }
 
 
-const Guest = props => {
+const UserForm = props => {
   const { history, match:{params:{id}} } = props;
   const handleComplete = () => history.push('/users')
   const formProps = {
+    root:'/users',
     history,
     schema,
     mutation:editUser,
@@ -77,10 +78,10 @@ const Guest = props => {
       : formConfig,
   }
   return !!id //if we have an id, let's fetch the data for it.
-    ? <FormWithData id={id} query={getUser} {...formProps}/>
+    ? <FormWithData id={id} query={getUser} dataHandler={arr => arr} {...formProps}/>
     : <Form {...formProps} done={handleComplete} />
 };
 
 
 
-export default withRouter(Guest)
+export default withRouter(UserForm)

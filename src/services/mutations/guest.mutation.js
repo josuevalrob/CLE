@@ -26,7 +26,7 @@ mutation deleteGuest($id: ID!) {
 	deleteGuest(id:$id)
 }
 `
-export const editGuest = gql`
+export const updateGuest = gql`
 mutation updateGuest($input: GuestInput!) {
   updateGuest(input: $input) {
     id

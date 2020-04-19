@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {getGuest, allUser} from '../../../services/Queries'
-import {editGuest, createGuest} from '../../../services/mutations'
+import {updateGuest, createGuest} from '../../../services/mutations'
 import Form, {FormWithData} from '../../components/Form'
 import {schema} from './GuestFormValidation'
 import { useQuery } from '@apollo/react-hooks';
@@ -97,7 +97,7 @@ const Guest = props => {
     root:Guestroot,
     history,
     schema,
-    mutation: !!id ? editGuest : createGuest,
+    mutation: !!id ? updateGuest : createGuest,
     config: formConfig(id, Object.values(data)[0]),
   }
 
@@ -106,7 +106,10 @@ const Guest = props => {
     ? <FormWithData
         id={id}
         query={getGuest}
-        dataHandler={arr => ({...arr, owner: arr.owner.id,})}
+        dataHandler={arr => ({
+          ...arr, 
+          ...(arr.owner && {owner: arr.owner.id})
+        })}
         {...formProps}
       />
   // new guest
