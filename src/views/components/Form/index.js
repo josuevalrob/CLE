@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import Form from './Form';
-
+import {flatterZero} from './../../../handlers/curries'
 export const FormWithData = (props) =>{
   //* hooks
   const { loading, error, data, refetch } = useQuery(props.query, {variables: { id:props.id }})
@@ -40,6 +40,3 @@ FormWithData.propTypes = {
 };
 
 export { default } from './Form';
-
-const flatterZero = objHandler => (data) => objHandler(flatter(0)(data))
-const flatter = arrN => data => Object.values(data)[arrN]

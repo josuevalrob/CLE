@@ -5,8 +5,8 @@ import { Toolbar, TableList } from './components';
 import { Card, CardActions, CardContent, TablePagination, LinearProgress} from '@material-ui/core';
 import {usePagination} from './../../../handlers/customHook';
 import { useQuery } from '@apollo/react-hooks';
-
-const List = ({query, config}) => {
+import {flatterZero} from './../../../handlers/curries'
+const List = ({query, config, dataHandler}) => {
   //* Styles 💅🏻
   const classes = useListStyles();
   //* hooks 🎣
@@ -21,7 +21,7 @@ const List = ({query, config}) => {
       <div className={classes.content}>
         {error && <div>{error.message}</div>}
         {loading && <LinearProgress /> }
-        {data && withPagination(TableList, {list: Object.values(data)[0], classes, config})}
+        {data && withPagination(TableList, {list: dataHandler(data), classes, config})}
       </div>
     </div>
   );
@@ -29,12 +29,17 @@ const List = ({query, config}) => {
 
 List.propTypes = {
   history: PropTypes.object,
+  dataHandler: PropTypes.func,
   config: PropTypes.shape({
     // columns: PropTypes.string,
     // actions: PropTypes.number,
     buttons: PropTypes.arrayOf(PropTypes.func)
   }),
 };
+
+List.defaultProps = {
+  dataHandler: (data)=> Object.values(data)[0]
+}
 
 export default List;
 

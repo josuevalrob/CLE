@@ -7,7 +7,6 @@ query getGuests($input: GuestSearch, $limit:Int, $offset:Int) {
     email
     id
     owner {
-      id
       firstName
     }
     rol
