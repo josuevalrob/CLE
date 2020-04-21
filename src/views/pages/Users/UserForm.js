@@ -5,7 +5,7 @@ import {editUser} from '../../../services/mutations'
 import Form, {FormWithData} from '../../components/Form'
 import {schema} from './UserFormValidation'
 
-const formConfig = {
+const formConfig = id => ({
   fields: [
     {
       key: 'firstName',
@@ -15,13 +15,14 @@ const formConfig = {
     {
       key: 'email',
       label: 'Correo Electrónico',
+      disabled: !!id,
       type:"text"
     },
-    {
+    (!id && { //id just for creating a new user. 
       key: 'password',
       label: 'Contraseña',
       type:"password"
-    },
+    }),
     {
       key: 'lastName',
       label: 'Apellido',
@@ -56,10 +57,10 @@ const formConfig = {
 
   ],
   header: {
-    title:'Crear un nuevo Usuario',
-    subtitle:'El e-mail es requerido para notifiaciones',
+    title: !!id ? 'Editar Usuario' :'Crear un nuevo Usuario',
+    subtitle: !!id ? 'No se puede modificar el correo' :'El e-mail es requerido para notifiaciones',
   }
-}
+})
 
 
 const UserForm = props => {
@@ -70,12 +71,7 @@ const UserForm = props => {
     history,
     schema,
     mutation:editUser,
-    config: !!id
-      ? {
-          ...formConfig,
-          header: {title:'Editar Usuario', subtitle: 'No se puede modificar el correo'}
-        }
-      : formConfig,
+    config: formConfig(id),
   }
   return !!id //if we have an id, let's fetch the data for it.
     ? <FormWithData id={id} query={getUser} dataHandler={arr => arr} {...formProps}/>

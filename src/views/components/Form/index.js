@@ -12,7 +12,6 @@ export const FormWithData = (props) =>{
   //* handlers 
   const handleComplete = () => refetch().then((x)=> props.history.push(props.root))
   const handleByParent = flatterZero(props.dataHandler)
-
   //* Return
   if(error) return <Redirect to={props.root}/>; //* error validation
   if (loading) return <LinearProgress />;

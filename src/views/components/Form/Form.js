@@ -5,9 +5,12 @@ import PropTypes from 'prop-types'
 import { Button, FormHelperText, TextField, Select, MenuItem, FormControl, InputLabel, CircularProgress} from '@material-ui/core';
 import {Mutation } from 'react-apollo'
 import { handleVariables } from '../../../handlers/curries';
-import {useStyles} from './styles'
+import {useStyles} from './styles';
+import { makeStyles } from '@material-ui/styles';
+
 const CustomForm = ({data, config, mutation, done, history, schema}) => {
-  const classes= useStyles()
+  const classes= useStyles();
+  // const classesParent = makeStyles(config.stye)
   const {formState, handleChange} = useForm(
     !!data
       ? {...data} // maybe I should clean data...
@@ -18,14 +21,11 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
   const handleForm = handleVariables(console.log)({input:formState.values});
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
-
+    console.log(formState)
   return (
   <AllPageForm classes={classes} goBack={() => history.goBack()} >
     <Mutation mutation={mutation} onCompleted={done} >
     { (graphQlCallback, { loading, error }) => {
-      // if(error) {
-      //   debugger
-      // }
       return (
       <form className={classes.form} onSubmit={(e)=>handleForm(e, graphQlCallback)} >
         <HeaderForm {...config.header} style={classes.title}/>
@@ -38,7 +38,6 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
               disabled={disabled}
               className={classes.textField}
               error={hasError(key)}
-              fullWidth
               helperText={ hasError(key) ? formState.errors[key][0] : null }
               label={label}
               onChange={handleChange}
@@ -66,6 +65,18 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
               </Select>
               { helper && <FormHelperText>{helper}</FormHelperText> }
             </FormControl>
+          : type === 'password' ?
+            <TextField name={key} key={key}
+              disabled={disabled}
+              className={classes.textField}
+              error={hasError(key)}
+              helperText={ hasError(key) ? formState.errors[key][0] : null }
+              label={label}
+              onChange={handleChange}
+              type={type}
+              value={formState.values[key] || ''}
+              variant="outlined"
+            />
           : null
 
         )}

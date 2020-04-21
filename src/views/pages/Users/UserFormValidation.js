@@ -15,11 +15,7 @@ export const schema = {
       maximum: 64
     }
   },
-  password: {
-    presence: {
-      allowEmpty: false, message: 'is required' 
-    },
-  },
+  password: {}, //TODO add validation
   lastName: {
     length: {
       maximum: 32
