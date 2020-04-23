@@ -6,7 +6,6 @@ query getUser($id: ID!) {
 	getUser(id:$id) {
     id
     rol
-    email
     firstName
     lastName
     phone

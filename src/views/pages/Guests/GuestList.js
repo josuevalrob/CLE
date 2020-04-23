@@ -3,7 +3,6 @@ import List from '../../components/List'
 import {allGuest} from '../../../services/Queries'
 import {deleteGuest} from '../../../services/mutations'
 import {DeleteButton, LinkButton} from './../../components/ActionsButtons'
-import { flatterZero } from '../../../handlers/curries';
 
 const DeleteGuest = ({id}) => <DeleteButton mutation={deleteGuest} id={id}/>
 const EditGuest = ({id}) => <LinkButton color='default' url={`/guest/edit/${id}`} label='Editar'/>

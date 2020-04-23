@@ -12,13 +12,13 @@ const formConfig = id => ({
       label: 'Nombre',
       type:"text"
     },
-    {
+    (!id && {
       key: 'email',
       label: 'Correo Electrónico',
       disabled: !!id,
       type:"text"
-    },
-    (!id && { //id just for creating a new user. 
+    }),
+    (!id && { //id just for creating a new user.
       key: 'password',
       label: 'Contraseña',
       type:"password"
@@ -47,7 +47,7 @@ const formConfig = id => ({
     {
       key: 'birth',
       label: 'Fecha de Nacimiento',
-      type:"text"
+      type:"date"
     },
     {
       key: 'profilePhoto',
@@ -74,7 +74,9 @@ const UserForm = props => {
     config: formConfig(id),
   }
   return !!id //if we have an id, let's fetch the data for it.
-    ? <FormWithData id={id} query={getUser} dataHandler={arr => arr} {...formProps}/>
+    ? <FormWithData id={id} query={getUser} dataHandler={obj => {
+      return {...obj, ...(!obj.birth && {birth: new Date('2000-08-18T21:11:54')})}
+    }} {...formProps}/>
     : <Form {...formProps} done={handleComplete} />
 };
 

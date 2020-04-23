@@ -11,7 +11,6 @@ export const useForm = (values, schema) => {
     errors: {}
   }
   const [formState, setFormState] = useState(initialState);
-
   useEffect(() => {
     const errors = validate(formState.values, schema);
 

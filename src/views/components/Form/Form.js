@@ -6,17 +6,21 @@ import { Button, FormHelperText, TextField, Select, MenuItem, FormControl, Input
 import {Mutation } from 'react-apollo'
 import { handleVariables } from '../../../handlers/curries';
 import {useStyles} from './styles';
-import { makeStyles } from '@material-ui/styles';
+import DateFnsUtils from '@date-io/date-fns';
+
+import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 
 const CustomForm = ({data, config, mutation, done, history, schema}) => {
   const classes= useStyles();
   // const classesParent = makeStyles(config.stye)
+
   const {formState, handleChange} = useForm(
     !!data
       ? {...data} // maybe I should clean data...
       : config.fields.map(({key})=>({[key]:''})), 
     schema
   );
+  const fakeDateEvent = (key) => (string) => fakeEventTrigger(string)(handleChange)(key)
 
   const handleForm = handleVariables(console.log)({input:formState.values});
 
@@ -77,6 +81,19 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
               value={formState.values[key] || ''}
               variant="outlined"
             />
+          : type === 'date' ?
+            <MuiPickersUtilsProvider key={key} utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                margin="normal"
+                inputVariant="outlined"
+                id={`date-picker-dialog-${key}`}
+                label={label}
+                format="MM/dd/yyyy"
+                value={formState.values[key] || ''}
+                onChange={fakeDateEvent(key)}
+                KeyboardButtonProps={{'aria-label': 'change date'}}
+              />
+            </MuiPickersUtilsProvider>
           : null
 
         )}
@@ -118,3 +135,13 @@ CustomForm.propTypes = {
 };
 
 export default CustomForm
+
+const fakeEventTrigger = string => handler => key =>
+  handler({
+    persist: () => undefined,
+    target: {
+      name: key,
+      type: 'date',
+      value: string
+    }
+  })

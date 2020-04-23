@@ -5,7 +5,7 @@ import { Toolbar, TableList } from './components';
 import { Card, CardActions, CardContent, TablePagination, LinearProgress} from '@material-ui/core';
 import {usePagination} from './../../../handlers/customHook';
 import { useQuery } from '@apollo/react-hooks';
-import {flatterZero} from './../../../handlers/curries'
+
 const List = ({query, config, dataHandler}) => {
   //* Styles 💅🏻
   const classes = useListStyles();

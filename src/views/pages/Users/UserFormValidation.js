@@ -8,14 +8,13 @@ export const schema = {
       maximum: 32
     }
   },
-  email: {
-    presence: { allowEmpty: false, message: 'is required' },
-    email: true,
-    length: {
-      maximum: 64
-    }
-  },
-  password: {}, //TODO add validation
+  // email: {
+  //   presence: { allowEmpty: false, message: 'is required' },
+  //   email: true,
+  //   length: {
+  //     maximum: 64
+  //   }
+  // },
   lastName: {
     length: {
       maximum: 32
@@ -36,12 +35,12 @@ export const schema = {
       maximum: 32
     }
   },
-  birth: {
-    // date type
-    length: {
-      maximum: 32
-    }
-  },
+  // birth: {
+  //   // date type
+  //   datetime: {
+  //     dateOnly: true,
+  //   }
+  // },
   profilePhoto: {
     // check if is url!!
   },
