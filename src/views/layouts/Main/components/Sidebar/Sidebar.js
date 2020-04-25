@@ -7,13 +7,9 @@ import { Profile, SidebarNav } from './components';
 import {
   Dashboard,
   People,
-  ShoppingBasket,
-  TextFields,
-  Image,
-  AccountBox,
-  Settings,
   LockOpen,
-  RecentActors,
+  GroupAdd,
+  Wallpaper,
 } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
@@ -58,37 +54,17 @@ const Sidebar = props => {
     {
       title: 'Invitados',
       href: '/guests',
-      icon: <RecentActors />
+      icon: <GroupAdd />
     },
     {
-      title: 'Products',
-      href: '/products',
-      icon: <ShoppingBasket />
+      title: 'Turnos',
+      href: '/turnos',
+      icon: <Wallpaper />
     },
     {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpen />
-    },
-    {
-      title: 'Typography',
-      href: '/typography',
-      icon: <TextFields />
-    },
-    {
-      title: 'Icons',
-      href: '/icons',
-      icon: <Image />
-    },
-    {
-      title: 'Account',
+      title: 'Cuenta',
       href: '/account',
-      icon: <AccountBox />
-    },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <Settings />
+      icon: <LockOpen />
     }
   ];
 
@@ -110,7 +86,15 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
         />
-        {/* <UpgradePlan /> */}
+        <Divider className={classes.divider} />
+        <SidebarNav
+          className={classes.nav}
+          pages={[{
+            title: 'FAQ',
+            href: '/',
+            icon: <Wallpaper />
+          }]}
+        />
       </div>
     </Drawer>
   );

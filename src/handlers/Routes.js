@@ -13,10 +13,7 @@ import {
   GuestList as GuestListView,
   GuestForm as GuestFormView,
   GuestInvite as GuestInviteView,
-  Typography as TypographyView,
-  Icons as IconsView,
   Account as AccountView,
-  Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
   Invitation as InvitationView,
@@ -59,31 +56,13 @@ const Routes = () => {
         component={ProductListView}
         exact
         layout={MainLayout}
-        path="/products"
-      />
-      <RouteWithLayout
-        component={TypographyView}
-        exact
-        layout={MainLayout}
-        path="/typography"
-      />
-      <RouteWithLayout
-        component={IconsView}
-        exact
-        layout={MainLayout}
-        path="/icons"
+        path="/turnos"
       />
       <RouteWithLayout
         component={AccountView}
         exact
         layout={MainLayout}
         path="/account"
-      />
-      <RouteWithLayout
-        component={SettingsView}
-        exact
-        layout={MainLayout}
-        path="/settings"
       />
       <RouteWithLayout exact path="/guests" component={GuestListView} layout={MainLayout} />
       <RouteWithLayout exact path="/guest/edit/:id" component={GuestFormView} layout={MinimalLayout} />
