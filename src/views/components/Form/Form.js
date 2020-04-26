@@ -25,7 +25,6 @@ const CustomForm = ({data, config, mutation, done, history, schema}) => {
   const handleForm = handleVariables(console.log)({input:formState.values});
 
   const hasError = field => !!(formState.touched[field] && formState.errors[field])
-    console.log(formState)
   return (
   <AllPageForm classes={classes} goBack={() => history.goBack()} >
     <Mutation mutation={mutation} onCompleted={done} >
