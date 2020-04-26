@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductsToolbar = props => {
+const TurnosToolbar = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -46,21 +46,21 @@ const ProductsToolbar = props => {
           color="primary"
           variant="contained"
         >
-          Add product
+          Add Turno
         </Button>
       </div>
       <div className={classes.row}>
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search product"
+          placeholder="Search Turno"
         />
       </div>
     </div>
   );
 };
 
-ProductsToolbar.propTypes = {
+TurnosToolbar.propTypes = {
   className: PropTypes.string
 };
 
-export default ProductsToolbar;
+export default TurnosToolbar;

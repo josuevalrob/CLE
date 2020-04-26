@@ -39,8 +39,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductCard = props => {
-  const { className, product, ...rest } = props;
+const TurnoCard = props => {
+  const { className, Turno, ...rest } = props;
 
   const classes = useStyles();
 
@@ -52,9 +52,9 @@ const ProductCard = props => {
       <CardContent>
         <div className={classes.imageContainer}>
           <img
-            alt="Product"
+            alt="Turno"
             className={classes.image}
-            src={product.imageUrl}
+            src={Turno.imageUrl}
           />
         </div>
         <Typography
@@ -62,13 +62,13 @@ const ProductCard = props => {
           gutterBottom
           variant="h4"
         >
-          {product.title}
+          {Turno.title}
         </Typography>
         <Typography
           align="center"
           variant="body1"
         >
-          {product.description}
+          {Turno.description}
         </Typography>
       </CardContent>
       <Divider />
@@ -98,7 +98,7 @@ const ProductCard = props => {
               display="inline"
               variant="body2"
             >
-              {product.totalDownloads} Downloads
+              {Turno.totalDownloads} Downloads
             </Typography>
           </Grid>
         </Grid>
@@ -107,9 +107,9 @@ const ProductCard = props => {
   );
 };
 
-ProductCard.propTypes = {
+TurnoCard.propTypes = {
   className: PropTypes.string,
-  product: PropTypes.object.isRequired
+  Turno: PropTypes.object.isRequired
 };
 
-export default ProductCard;
+export default TurnoCard;
