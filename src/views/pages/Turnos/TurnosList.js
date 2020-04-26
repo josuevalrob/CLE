@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { TurnosToolbar, TurnoCard } from './components';
-import mockData from './data';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,17 +21,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TurnoList = () => {
+const TurnoList = ({turnos}) => {
   const classes = useStyles();
-
-  const [Turnos] = useState(mockData);
-
   return (
     <div className={classes.root}>
       <TurnosToolbar />
       <div className={classes.content}>
         <Grid container spacing={3} >
-          {Turnos.map(Turno => (
+          {turnos.map(Turno => (
             <Grid item key={Turno.id} lg={4} md={6} xs={12} >
               <TurnoCard Turno={Turno} />
             </Grid>

@@ -1,5 +1,6 @@
 import gql from "graphql-tag"
 export * from './guest.queries'
+export * from './turnos.queries'
 
 export const getUser = gql`
 query getUser($id: ID!) {
