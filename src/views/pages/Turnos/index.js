@@ -11,9 +11,19 @@ const TurnoPage = () => {
   //* Return
   if(error) return <div>{error.message}</div>; //* error validation
   if (loading) return <LinearProgress />;
-  return <TurnoList turnos={flatterZero(data)(d=>d)} />
+  const treatData = flatterZero(treatTurnosGrid);
+  return <TurnoList turnos={treatData(data)} />
 }
 
 
 
 export default TurnoPage
+
+const treatTurnosGrid = data => data.map(obj=>({
+  ...obj,
+  duration: `${restDays(obj.dates)} días`
+}))
+
+const restDays = ([start, end]) => Math.floor(
+  (end.value - start.value) / (1000 * 3600 * 24)
+)

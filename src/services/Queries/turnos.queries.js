@@ -6,6 +6,12 @@ query getTurnos($input: TurnoSearch, $limit:Int, $offset:Int) {
     id
     name
     description
+    kind
+    enrolled
+    dates {
+      label
+      value
+    }
   }
 }
 `

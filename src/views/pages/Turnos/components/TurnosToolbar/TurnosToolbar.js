@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
+import {LinkButton} from '../../../../components/ActionsButtons'
 
 import { SearchInput } from '../../../../components';
 
@@ -42,17 +43,12 @@ const TurnosToolbar = props => {
         <span className={classes.spacer} />
         <Button className={classes.importButton}>Import</Button>
         <Button className={classes.exportButton}>Export</Button>
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          Add Turno
-        </Button>
+        <LinkButton url={`/turno/add`} label='Agregar Turno' />
       </div>
       <div className={classes.row}>
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search Turno"
+          placeholder="Buscar Turno por Nombre"
         />
       </div>
     </div>
