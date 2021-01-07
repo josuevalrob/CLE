@@ -2,27 +2,27 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {getUser} from '../../../services/Queries'
 import {editUser} from '../../../services/mutations'
-import Form, {FormWithData} from '../../components/Form'
+import CustomForm, {FormWithData} from '../../components/Form'
 import {schema} from './UserFormValidation'
 
-const formConfig = id => ({
+export const formConfig = id => ({
   fields: [
     {
       key: 'firstName',
       label: 'Nombre',
       type:"text"
     },
-    (!id && {
+    (!id ? {
       key: 'email',
       label: 'Correo Electrónico',
       disabled: !!id,
       type:"text"
-    }),
-    (!id && { //id just for creating a new user.
+    } : {}),
+    (!id ? { //id just for creating a new user.
       key: 'password',
       label: 'Contraseña',
       type:"password"
-    }),
+    } : {}),
     {
       key: 'lastName',
       label: 'Apellido',
@@ -75,9 +75,9 @@ const UserForm = props => {
   }
   return !!id //if we have an id, let's fetch the data for it.
     ? <FormWithData id={id} query={getUser} dataHandler={obj => {
-      return {...obj, ...(!obj.birth && {birth: new Date('2000-08-18T21:11:54')})}
-    }} {...formProps}/>
-    : <Form {...formProps} done={handleComplete} />
+        return {...obj, ...(!obj.birth && {birth: new Date('2000-08-18T21:11:54')})}
+      }} {...formProps}/>
+    : <CustomForm {...formProps} done={handleComplete} />
 };
 
 

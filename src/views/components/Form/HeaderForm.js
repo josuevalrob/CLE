@@ -41,9 +41,12 @@ export const AllPageForm = ({children, classes, goBack}) => {
     return (
         <div className={classes.root}>
             <Grid className={classes.grid} container >
-                <Grid className={classes.content} item lg={7} xs={12} >
+                <Grid className={classes.content} item xs={12} >
                     <div className={classes.content}>
+                    {
+                        goBack &&
                         <Cross style={classes.contentHeader} handleBack={goBack} />
+                    }
                         <div className={classes.contentBody}>
                             {children}
                         </div>
